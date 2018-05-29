@@ -22,27 +22,30 @@ def random_line(afile):
 """
     Given a csv file pickup a random line with a list of keywords
 """
-def random_keywords(file_name):
+def random_keywords(afile):
     keywords = []
 
     #convert the csv line entry into a list 
-    keywords = list(random_line(file_name))
+    line = random_line(afile)
+    line = line.strip()
+    keywords = line.split(",")
 
     #avoid entrys with less than 2 keywords
-    if len(keywords <2):
-        random_keywords(file_name)
+    if len(keywords) <2:
+        random_keywords(afile)
     else:
         return keywords
 
 """
     Given a file turn it into a list
 """
-def file_in_list(file_name):
+def file_in_list(afile):
 
     result = []
 
     #just run into the lines of the file and append the to a list
-    for line in file_name:
+    for line in afile:
+        line = line.strip()
         result.append(line)
 
     return result

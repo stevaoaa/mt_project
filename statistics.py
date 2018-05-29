@@ -23,26 +23,24 @@ def check_similarity(source, follow_up):
 """
 def get_ROCOF(result_file):
 
-    with open(result_file, 'rU') as json_data:
+    #get the first result time    
+    starting_time = result_file[0][-1]
 
-        #get the first result time    
-        starting_time = result_file[0][-1]
+    for line in result_file:
 
-        for line in result_file:
+        #get next time
+        next_time = line[-1]
 
-            #get next time
-            next_time = line[-1]
+        #get elapsed time
+        elapsed_time = calculate_elapsed_time(starting_time, next_time)
 
-            #get elapsed time
-            elapsed_time = calculate_elapsed_time(starting_time, next_time)
+        #less than 1 hour
+        if elapsed_time.seconds < 3600:
+            pass
 
-            #less than 1 hour
-            if elapsed_time.seconds < 3600:
-                pass
-
-            #1 hour should calculate ROCOF with data
-            else:
-                pass
+        #1 hour should calculate ROCOF with data
+        else:
+            pass
 
 
 """
