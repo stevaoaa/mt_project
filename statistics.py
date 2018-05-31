@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from util import file_in_list, calculate_elapsed_time
-
 from sklearn.metrics import jaccard_similarity_score
+
+#local
+import util
 
 
 """
@@ -11,8 +12,8 @@ from sklearn.metrics import jaccard_similarity_score
 """
 def check_similarity(source, follow_up):
     
-    source_list = file_in_list(source)
-    follow_up_list = file_in_list(follow_up)
+    source_list = util.file_in_list(source)
+    follow_up_list = util.file_in_list(follow_up)
 
     jaccard = jaccard_similarity_score(source_list, follow_up_list)
 
@@ -23,8 +24,8 @@ def check_similarity(source, follow_up):
 """
 def get_ROCOF(result_file):
 
-    #get the first result time    
-    starting_time = result_file[0][-1]
+    #get the last element from the first result line    
+    starting_time = next(result_file)[-1]
 
     for line in result_file:
 
@@ -32,7 +33,7 @@ def get_ROCOF(result_file):
         next_time = line[-1]
 
         #get elapsed time
-        elapsed_time = calculate_elapsed_time(starting_time, next_time)
+        elapsed_time = util.calculate_elapsed_time(starting_time, next_time)
 
         #less than 1 hour
         if elapsed_time.seconds < 3600:

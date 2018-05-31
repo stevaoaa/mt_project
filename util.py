@@ -8,6 +8,9 @@ import random
 from datetime import datetime
 from datetime import timedelta
 
+#local
+import engines
+
 """
     (Waterman's "Reservoir Algorithm") from Knuth's "The Art of Computer Programming"
     #https://stackoverflow.com/questions/3540288/how-do-i-read-a-random-line-from-one-file-in-python
@@ -76,3 +79,8 @@ def calculate_elapsed_time(s1, s2):
         tdelta = timedelta(days=0, seconds=tdelta.seconds, microseconds=tdelta.microseconds)
     
     return tdelta
+
+
+def create_search_string(keywords, follow_up= False):
+    pass
+

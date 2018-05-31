@@ -9,6 +9,7 @@ import unittest
 
 #local
 import util
+import engines
 import statistics
 
 """
@@ -65,6 +66,8 @@ class SimplisticTest(unittest.TestCase):
         print(("Difference between dates: %s") % (delta))
         self.assertTrue(True)
 
+        
+
     #statistics.py tests
     def test_check_similarity(self):
         
@@ -78,12 +81,38 @@ class SimplisticTest(unittest.TestCase):
         print(("Jaccard Coefficient: %s") % (jaccard)) 
         self.assertTrue(True)
 
+
+
     def test_get_ROCOF(self):
-        pass
+        path_file = os.getcwd() + "/dataset/keywords_sample.csv"
+        with open(path_file, "r") as afile:
+            first_line = next(afile)
+
+        #get the last element (thus, the time of execution)
+        last_element = first_line[-1]
+        print(last_element)
+
+
 
     def test_get_ROCOA(self):
         pass
 
+
+    def test_create_search_string(self):
+
+        path_file = os.getcwd() + "/dataset/keywords_sample.csv"
+
+        with open(path_file, "r") as afile:
+            keywords = util.random_keywords(afile)
+
+            result = engines.ieee_spring_string(keywords,follow_up=True)
+            print("IEEE|Springer String: %s" % (result))
+
+            result = engines.scopus_string(keywords,follow_up=True)
+            print("Scopus String: %s" % (result))
+
+            result = engines.sciente_direct_string(keywords,follow_up=True)
+            print("Science Direct String: %s" % (result))
 
 if __name__ == '__main__':
     unittest.main()
