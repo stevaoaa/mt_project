@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import csv
+import re
 import random
 
 from datetime import datetime
@@ -12,11 +13,16 @@ from datetime import timedelta
     #https://stackoverflow.com/questions/3540288/how-do-i-read-a-random-line-from-one-file-in-python
 """
 def random_line(afile):
+    
+    afile.seek(0)
     line = next(afile)
     for num, aline in enumerate(afile):
       if random.randrange(num + 2): continue
       line = aline
-    return line
+
+    #some keywords have a description. Eg.: Exploit (computer security) -> remove content surrounded by (). 
+    new_line = re.sub(r'\([^)]*\)', '', line)
+    return new_line
 
 
 """
@@ -30,9 +36,9 @@ def random_keywords(afile):
     line = line.strip()
     keywords = line.split(",")
 
-    #avoid entrys with less than 2 keywords
-    if len(keywords) <2:
-        random_keywords(afile)
+    #avoid entrys with less than 2 keywords or empyt lines
+    if len(keywords) <2 or (keywords == None):
+        return random_keywords(afile)
     else:
         return keywords
 
