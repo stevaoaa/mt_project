@@ -105,14 +105,17 @@ class SimplisticTest(unittest.TestCase):
         with open(path_file, "r") as afile:
             keywords = util.random_keywords(afile)
 
-            result = engines.ieee_spring_string(keywords,follow_up=True)
+            result = engines.ieee_spring_string(keywords,title="Some title of test")
             print("IEEE|Springer String: %s" % (result))
 
-            result = engines.scopus_string(keywords,follow_up=True)
+            result = engines.scopus_string(keywords,title="Some title of test")
             print("Scopus String: %s" % (result))
 
-            result = engines.sciente_direct_string(keywords,follow_up=True)
+            result = engines.sciente_direct_string(keywords,title="Some title of test")
             print("Science Direct String: %s" % (result))
+
+            result = engines.acm_string(keywords,title="Some title of test")
+            print("ACM String: %s" % (result))
 
 if __name__ == '__main__':
     unittest.main()
