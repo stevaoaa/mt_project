@@ -81,6 +81,38 @@ def calculate_elapsed_time(s1, s2):
     return tdelta
 
 
-def create_search_string(keywords, follow_up= False):
-    pass
+def create_search_string(keywords, engine, title= False):
+    
+    if engine == "ACM":
+        if not title:
+            search_string = engines.acm_string(keywords)
+        else:
+            search_string = engines.acm_string(keywords, title)
+        
+        return search_string
+
+    if engine == "IEEE":
+        if not title:
+            search_string = engines.ieee_spring_string(keywords)
+        else:
+            search_string = engines.ieee_spring_string(keywords, title)
+        
+        return search_string
+
+    if engine == "Scidirect":
+        if not title:
+            search_string = engines.sciente_direct_string(keywords)
+        else:
+            search_string = engines.sciente_direct_string(keywords, title)
+        
+        return search_string
+
+    if engine == "SCOPUS":
+        if not title:
+            search_string = engines.scopus_string(keywords)
+        else:
+            search_string = engines.scopus_string(keywords, title)
+        
+        return search_string
+    
 
