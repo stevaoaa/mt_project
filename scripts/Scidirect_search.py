@@ -31,10 +31,10 @@ class Scidirect():
         driver.find_element_by_id("qs").clear()
         driver.find_element_by_id("qs").send_keys(self.stringBusca)
         if title:
-            driver.find_element_by_id("aa-srp-result-list-title-1").send_keys(title)
+            driver.find_element_by_id("tak").send_keys(title)
         
         if conference:
-            driver.find_element_by_id("subtype-srctitle-link").send_keys(conference)
+            driver.find_element_by_id("pub").send_keys(conference)
 
         element = driver.find_element_by_xpath("//button[@type='submit']")
         driver.execute_script("arguments[0].click();", element)
