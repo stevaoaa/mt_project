@@ -2,11 +2,11 @@ from os.path import dirname, basename, isfile
 import glob
 
 #local
-import ACM_search 
-import IEEE_search
-import Scidirect_search
-import SCOPUS_search
-import Springer_search
+from scripts.ACM_search import ACM
+from scripts.IEEE_search import IEEE
+from scripts.Springer_search import Springer
+from scripts.SCOPUS_search import Scopus
+from scripts.Scidirect_search import Scidirect
 
 #automated solution
 modules = glob.glob(dirname(__file__)+"/*.py")

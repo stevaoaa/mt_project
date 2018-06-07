@@ -10,7 +10,7 @@ import unittest, time, re
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 import sys
 
-class Springer(unittest.TestCase):
+class Springer():
 
     def __init__(self, stringBusca, webDriver):
         self.stringBusca = stringBusca
@@ -46,6 +46,7 @@ class Springer(unittest.TestCase):
             artigos_list.append(result.find_elements_by_tag_name("h2")[0].find_elements_by_tag_name("a")[0].text)
             published_list.append(result.find_elements_by_class_name("meta")[0].find_elements_by_class_name("enumeration")[0].text)            
 
+        self.tearDown()
         return [numberResult, artigos_list, published_list]
     
     def is_element_present(self, how, what):
@@ -71,7 +72,4 @@ class Springer(unittest.TestCase):
     
     def tearDown(self):
         self.driver.quit()
-        self.assertEqual([], self.verificationErrors)
 
-if __name__ == "__main__":
-    unittest.main()

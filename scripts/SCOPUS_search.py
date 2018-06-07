@@ -10,7 +10,7 @@ import unittest, time, re
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 import sys
 
-class Scopus(unittest.TestCase):
+class Scopus():
 
     def __init__(self, stringBusca, webDriver):
         self.stringBusca = stringBusca
@@ -56,7 +56,7 @@ class Scopus(unittest.TestCase):
                         break
                 var = var + c          
                 published_list.append(var)
-
+        self.tearDown()
         return [numResultados_source, artigos_list, published_list] 
 
     def is_element_present(self, how, what):
@@ -87,8 +87,4 @@ class Scopus(unittest.TestCase):
 
     def tearDown(self):
         self.driver.quit()
-        self.assertEqual([], self.verificationErrors)
-
-
-if __name__ == "__main__":
-    unittest.main()
+        

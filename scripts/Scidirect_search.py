@@ -8,7 +8,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
-class Scidirect(unittest.TestCase):
+class Scidirect():
 
     def __init__(self, stringBusca, webDriver):
         self.stringBusca = stringBusca
@@ -44,6 +44,8 @@ class Scidirect(unittest.TestCase):
             resultItems = driver.find_elements_by_class_name("ResultList")[0].find_elements_by_class_name("ResultItem")[i]
             artigos_list.append(resultItems.find_elements_by_tag_name("a")[0].text)
             published_list.append(resultItems.find_elements_by_class_name("subtype-srctitle-link")[0].text)
+
+        self.tearDown()
         
         return [numResults, artigos_list, published_list]
         
@@ -71,7 +73,3 @@ class Scidirect(unittest.TestCase):
     
     def tearDown(self):
         self.driver.quit()
-        self.assertEqual([], self.verificationErrors)
-
-if __name__ == "__main__":
-    unittest.main()

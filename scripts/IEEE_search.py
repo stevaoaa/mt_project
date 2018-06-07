@@ -12,7 +12,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 import sys
 
-class IEEE(unittest.TestCase):
+class IEEE():
 
     def __init__(self, stringBusca, webDriver):
         self.stringBusca = stringBusca
@@ -71,6 +71,8 @@ class IEEE(unittest.TestCase):
             result.find_elements_by_class_name("col-22-24")[0].find_elements_by_class_name("description")[
                 0].find_elements_by_tag_name("a")[0].get_attribute("innerHTML").replace("[::", "").replace("::]", "")
             published_list.append(publishedFollowUP)
+
+        self.tearDown()
         
         return [numberResult, artigos_list, published_list] 
 
@@ -102,8 +104,5 @@ class IEEE(unittest.TestCase):
 
     def tearDown(self):
         self.driver.quit()
-        self.assertEqual([], self.verificationErrors)
 
 
-if __name__ == "__main__":
-    unittest.main()
