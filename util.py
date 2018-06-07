@@ -43,6 +43,10 @@ def random_keywords(afile):
     if len(keywords) <2 or (keywords == None):
         return random_keywords(afile)
     else:
+        
+        if len(keywords) > 4:
+            return keywords[:4]
+        
         return keywords
 
 """
