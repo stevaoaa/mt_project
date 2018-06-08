@@ -31,18 +31,18 @@ def ieee_string(keywords, title= None, conference = None):
     terms = ' OR '
     terms = terms.join('"{0}"'.format(w) for w in keywords)    
 
-    #IEEE or Springer
-    ieee = "source-query (%s)" % (terms)
+    #IEEE
+    ieee = "((\"Document Title\":) (\"%s\"))" % (terms)
     if title:        
 
-        ieee = "source-query (%s)" % (terms)
+        ieee = "((\"Document Title\":) (\"%s\"))" % (terms)
         complement = " AND (\"Document Title\": \"%s\")"  % (title)
         ieee = ieee + complement
 
     if conference:
         
-        ieee = "source-query (%s)" % (terms)
-        complement = " AND (\"Publication Title\": \"%s\")"  % (title)
+        ieee = "((\"Document Title\":) (\"%s\"))" % (terms)
+        complement = " AND (\"Publication Title\": \"%s\")"  % (conference)
         ieee = ieee + complement
 
     return ieee
@@ -65,7 +65,7 @@ def spring_string(keywords, title= None, conference = None):
     if conference:        
 
         springer = "source-query (%s)" % (terms)
-        complement = " AND (publication-title: \"%s\")"  % (title)
+        complement = " AND (publication-title: \"%s\")"  % (conference)
         springer = springer + complement
 
     return springer
@@ -86,7 +86,7 @@ def sciente_direct_string(keywords, title = None, conference = None):
 
     if conference:        
 
-        complement = " AND Title(\"%s\")" % (title)
+        complement = " AND Title(\"%s\")" % (conference)
         direct = direct + complement
 
     return direct
