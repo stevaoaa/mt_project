@@ -85,37 +85,69 @@ def calculate_elapsed_time(s1, s2):
     return tdelta
 
 
-def create_search_string(keywords, engine, title= False):
+def create_search_string(keywords, engine, title= False, conference = False):
     
     if engine == "ACM":
-        if not title:
-            search_string = engines.acm_string(keywords)
+        if title:
+            search_string = engines.acm_string(keywords, title = title)
+
+        if conference:
+            search_string = engines.acm_string(keywords, conference = conference)
+
         else:
-            search_string = engines.acm_string(keywords, title)
+            search_string = engines.acm_string(keywords)
         
         return search_string
 
     if engine == "IEEE":
-        if not title:
-            search_string = engines.ieee_spring_string(keywords)
+
+        if title:
+            search_string = engines.ieee_string(keywords, title = title)
+
+        if conference:
+            search_string = engines.ieee_string(keywords, conference = conference)
+
         else:
-            search_string = engines.ieee_spring_string(keywords, title)
-        
+            search_string = engines.ieee_string(keywords)
+                
         return search_string
 
     if engine == "Scidirect":
-        if not title:
-            search_string = engines.sciente_direct_string(keywords)
+
+        if title:
+            search_string = engines.sciente_direct_string(keywords, title = title)
+
+        if conference:
+            search_string = engines.sciente_direct_string(keywords, conference = conference)
+
         else:
-            search_string = engines.sciente_direct_string(keywords, title)
-        
+            search_string = engines.sciente_direct_string(keywords)
+                
         return search_string
 
     if engine == "SCOPUS":
-        if not title:
-            search_string = engines.scopus_string(keywords)
+
+        if title:
+            search_string = engines.scopus_string(keywords, title = title)
+
+        if conference:
+            search_string = engines.scopus_string(keywords, conference = conference)
+
         else:
-            search_string = engines.scopus_string(keywords, title)
+            search_string = engines.scopus_string(keywords)
+        
+        return search_string
+
+    if engine == "Springer":
+
+        if title:
+            search_string = engines.spring_string(keywords, title = title)
+
+        if conference:
+            search_string = engines.spring_string(keywords, conference = conference)
+
+        else:
+            search_string = engines.spring_string(keywords)
         
         return search_string
     
