@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+
+import locale
+
 from importlib import reload
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -36,7 +39,7 @@ class Springer():
         driver.find_element_by_id("search").click()
 
         trFirstResult = driver.find_elements_by_id("results-list")[0]
-        numberResult = int(driver.find_elements_by_tag_name("h1")[0].find_elements_by_tag_name("strong")[0].text)
+        numberResult = locale.atoi(driver.find_elements_by_tag_name("h1")[0].find_elements_by_tag_name("strong")[0].text)
 
         tBodyResults = driver.find_elements_by_id("results-list")[0].find_elements_by_tag_name("li")
         artigos_list = []

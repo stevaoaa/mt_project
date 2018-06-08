@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import locale
+
 from importlib import reload
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -41,12 +43,12 @@ class ACM(unittest.TestCase):
 
 		trFirstResult = driver.find_elements_by_id("results")[0].find_elements_by_class_name("details")[0]
 		trNumberResult = driver.find_elements_by_id("resultstats")[0].find_elements_by_id("resfound")[0]
-		numberResult = int(trNumberResult.find_elements_by_id("searchtots")[0].find_elements_by_tag_name("strong")[0].text)
+		numberResult = locale.atoi(trNumberResult.find_elements_by_id("searchtots")[0].find_elements_by_tag_name("strong")[0].text)
 		numberPage = driver.find_elements_by_id("results")[0].find_elements_by_class_name("pagerange")[0].text
 		nPage1 = numberPage.find("of")
 		nPage2 = numberPage.find("–")
 		nPage3 = numberPage[nPage2+2:nPage1-1]
-		numberResultPage = int(nPage3)
+		numberResultPage = locale.atoi(nPage3)
 		artigos_list = []
 		published_list = []
 

@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+
+import locale
+
 from importlib import reload
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -41,7 +44,7 @@ class IEEE():
         element = driver.find_element_by_id("submit-search")
         driver.execute_script("arguments[0].click();", element)
 
-        numberResult = int(driver.find_element_by_xpath("//div[@id='xplResultsContainer']/section/div[2]/div/span/span[2]").text)
+        numberResult = locale.atoi(driver.find_element_by_xpath("//div[@id='xplResultsContainer']/section/div[2]/div/span/span[2]").text)
         numResultPage = driver.find_element_by_css_selector("span.ng-scope > span.strong.ng-binding").text
         
         nPage1 = numResultPage.find("-")

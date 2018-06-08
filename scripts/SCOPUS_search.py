@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+
+import locale
+
 from importlib import reload
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -39,7 +42,7 @@ class Scopus():
         artigos_list = []
         published_list = []
 
-        numResultados_source = int(str(driver.find_element_by_class_name("resultsCount").text).replace(",",""))
+        numResultados_source = locale.atoi(driver.find_element_by_class_name("resultsCount").text)
         trFirstResult = driver.find_element_by_id("resultDataRow0")
         tBodyResults = driver.find_element_by_id("srchResultsList").find_element_by_tag_name("tbody").find_elements_by_class_name("searchArea")
         
