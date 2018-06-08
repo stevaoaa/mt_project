@@ -39,7 +39,7 @@ class Scopus():
         artigos_list = []
         published_list = []
 
-        numResultados_source = str(driver.find_element_by_class_name("resultsCount").text).replace(",","")
+        numResultados_source = int(str(driver.find_element_by_class_name("resultsCount").text).replace(",",""))
         trFirstResult = driver.find_element_by_id("resultDataRow0")
         tBodyResults = driver.find_element_by_id("srchResultsList").find_element_by_tag_name("tbody").find_elements_by_class_name("searchArea")
         

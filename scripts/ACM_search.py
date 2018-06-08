@@ -41,7 +41,7 @@ class ACM(unittest.TestCase):
 
 		trFirstResult = driver.find_elements_by_id("results")[0].find_elements_by_class_name("details")[0]
 		trNumberResult = driver.find_elements_by_id("resultstats")[0].find_elements_by_id("resfound")[0]
-		numberResult = trNumberResult.find_elements_by_id("searchtots")[0].find_elements_by_tag_name("strong")[0].text
+		numberResult = int(trNumberResult.find_elements_by_id("searchtots")[0].find_elements_by_tag_name("strong")[0].text)
 		numberPage = driver.find_elements_by_id("results")[0].find_elements_by_class_name("pagerange")[0].text
 		nPage1 = numberPage.find("of")
 		nPage2 = numberPage.find("–")

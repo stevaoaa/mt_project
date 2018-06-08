@@ -39,7 +39,7 @@ class Scidirect():
         element = driver.find_element_by_xpath("//button[@type='submit']")
         driver.execute_script("arguments[0].click();", element)
 
-        numResults = driver.find_element_by_css_selector("span.search-body-results-text").text
+        numResults = int(driver.find_element_by_css_selector("span.search-body-results-text").text)
         numResultsPage = int(driver.find_elements_by_class_name("SearchNavigation")[0].find_elements_by_class_name("active-per-page")[0].text)
 
         artigos_list = []
