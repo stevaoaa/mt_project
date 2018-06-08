@@ -4,6 +4,8 @@ import locale
 import unittest, time, re
 
 from importlib import reload
+
+import selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -51,38 +53,43 @@ class IEEE(unittest.TestCase):
         element = driver.find_element_by_id("submit-search")
         driver.execute_script("arguments[0].click();", element)
 
-        numberResult = locale.atoi(driver.find_element_by_xpath("//div[@id='xplResultsContainer']/section/div[2]/div/span/span[2]").text)
-        numResultPage = driver.find_element_by_css_selector("span.ng-scope > span.strong.ng-binding").text
-        
-        nPage1 = numResultPage.find("-")
-        nPage2 = numResultPage[nPage1+1:nPage1+3]
+        try:
+            numberResult = locale.atoi(driver.find_element_by_xpath("//div[@id='xplResultsContainer']/section/div[2]/div/span/span[2]").text)
+            numResultPage = driver.find_element_by_css_selector("span.ng-scope > span.strong.ng-binding").text
 
-        numberResultPage = int(nPage2)
+            nPage1 = numResultPage.find("-")
+            nPage2 = numResultPage[nPage1 + 1:nPage1 + 3]
 
-        artigos_list = []
-        published_list = []
+            numberResultPage = int(nPage2)
 
-        WebDriverWait(driver, 10).until(expected_conditions.presence_of_element_located((By.CLASS_NAME, "article-list")))
+            artigos_list = []
+            published_list = []
 
-        #List-results-items
-        numArtigos_Pagina = int(str(driver.find_elements_by_xpath("//span[@class='strong ng-binding']")[0].text)[2:])
-        while (len(driver.find_elements_by_class_name("List-results-items")) < numArtigos_Pagina):
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            WebDriverWait(driver, 10).until(expected_conditions.presence_of_element_located((By.CLASS_NAME, "article-list")))
 
-        resultItems = driver.find_elements_by_class_name("List-results-items")
-        cont = 0
-        
-        for result in resultItems:
-            cont += 1
-            titleFollowUP = result.find_elements_by_class_name("col-22-24")[0].find_elements_by_tag_name("a")[
-                0].get_attribute("innerHTML").replace("[::", "").replace("::]", "")
-            artigos_list.append(titleFollowUP)
-            publishedFollowUP = \
-            result.find_elements_by_class_name("col-22-24")[0].find_elements_by_class_name("description")[
-                0].find_elements_by_tag_name("a")[0].get_attribute("innerHTML").replace("[::", "").replace("::]", "")
-            published_list.append(publishedFollowUP)
-        
-        return [numberResult, artigos_list, published_list] 
+            # List-results-items
+            numArtigos_Pagina = int(
+                str(driver.find_elements_by_xpath("//span[@class='strong ng-binding']")[0].text)[2:])
+            while (len(driver.find_elements_by_class_name("List-results-items")) < numArtigos_Pagina):
+                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+            resultItems = driver.find_elements_by_class_name("List-results-items")
+            cont = 0
+
+            for result in resultItems:
+                cont += 1
+                titleFollowUP = result.find_elements_by_class_name("col-22-24")[0].find_elements_by_tag_name("a")[
+                    0].get_attribute("innerHTML").replace("[::", "").replace("::]", "")
+                artigos_list.append(titleFollowUP)
+                publishedFollowUP = \
+                    result.find_elements_by_class_name("col-22-24")[0].find_elements_by_class_name("description")[
+                        0].find_elements_by_tag_name("a")[0].get_attribute("innerHTML").replace("[::", "").replace(
+                        "::]", "")
+                published_list.append(publishedFollowUP)
+
+            return [numberResult, artigos_list, published_list]
+        except:
+            return [0, [], []]
 
     def is_element_present(self, how, what):
         try:

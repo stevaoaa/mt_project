@@ -39,18 +39,21 @@ class Springer(unittest.TestCase):
         driver.find_element_by_id("query").send_keys(self.stringBusca)
         driver.find_element_by_id("search").click()
 
-        trFirstResult = driver.find_elements_by_id("results-list")[0]
-        numberResult = locale.atoi(driver.find_elements_by_tag_name("h1")[0].find_elements_by_tag_name("strong")[0].text)
+        try:
+            trFirstResult = driver.find_elements_by_id("results-list")[0]
+            numberResult = locale.atoi(driver.find_elements_by_tag_name("h1")[0].find_elements_by_tag_name("strong")[0].text)
 
-        tBodyResults = driver.find_elements_by_id("results-list")[0].find_elements_by_tag_name("li")
-        artigos_list = []
-        published_list = []
+            tBodyResults = driver.find_elements_by_id("results-list")[0].find_elements_by_tag_name("li")
+            artigos_list = []
+            published_list = []
 
-        for result in tBodyResults:
-            artigos_list.append(result.find_elements_by_tag_name("h2")[0].find_elements_by_tag_name("a")[0].text)
-            published_list.append(result.find_elements_by_class_name("meta")[0].find_elements_by_class_name("enumeration")[0].text)            
+            for result in tBodyResults:
+                artigos_list.append(result.find_elements_by_tag_name("h2")[0].find_elements_by_tag_name("a")[0].text)
+                published_list.append(result.find_elements_by_class_name("meta")[0].find_elements_by_class_name("enumeration")[0].text)
 
-        return [numberResult, artigos_list, published_list]
+            return [numberResult, artigos_list, published_list]
+        except:
+            return [0, [], []]
     
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)

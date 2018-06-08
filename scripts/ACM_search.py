@@ -42,23 +42,26 @@ class ACM(unittest.TestCase):
 		driver.find_element_by_id("therunqueryedit").send_keys(self.stringBusca)
 		driver.find_element_by_name("Go").click()
 
-		trFirstResult = driver.find_elements_by_id("results")[0].find_elements_by_class_name("details")[0]
-		trNumberResult = driver.find_elements_by_id("resultstats")[0].find_elements_by_id("resfound")[0]
-		numberResult = locale.atoi(trNumberResult.find_elements_by_id("searchtots")[0].find_elements_by_tag_name("strong")[0].text)
-		numberPage = driver.find_elements_by_id("results")[0].find_elements_by_class_name("pagerange")[0].text
-		nPage1 = numberPage.find("of")
-		nPage2 = numberPage.find("–")
-		nPage3 = numberPage[nPage2+2:nPage1-1]
-		numberResultPage = locale.atoi(nPage3)
-		artigos_list = []
-		published_list = []
+		try:
+			trFirstResult = driver.find_elements_by_id("results")[0].find_elements_by_class_name("details")[0]
+			trNumberResult = driver.find_elements_by_id("resultstats")[0].find_elements_by_id("resfound")[0]
+			numberResult = locale.atoi(trNumberResult.find_elements_by_id("searchtots")[0].find_elements_by_tag_name("strong")[0].text)
+			numberPage = driver.find_elements_by_id("results")[0].find_elements_by_class_name("pagerange")[0].text
+			nPage1 = numberPage.find("of")
+			nPage2 = numberPage.find("–")
+			nPage3 = numberPage[nPage2+2:nPage1-1]
+			numberResultPage = locale.atoi(nPage3)
+			artigos_list = []
+			published_list = []
 
-		for i in range(0,numberResultPage):
-			trFirstResult = driver.find_elements_by_id("results")[0].find_elements_by_class_name("details")[i]
-			artigos_list.append(trFirstResult.find_elements_by_class_name("title")[0].find_elements_by_tag_name("a")[0].text)
-			published_list.append(trFirstResult.find_elements_by_class_name("source")[0].find_elements_by_tag_name("span")[1].text)
+			for i in range(0,numberResultPage):
+				trFirstResult = driver.find_elements_by_id("results")[0].find_elements_by_class_name("details")[i]
+				artigos_list.append(trFirstResult.find_elements_by_class_name("title")[0].find_elements_by_tag_name("a")[0].text)
+				published_list.append(trFirstResult.find_elements_by_class_name("source")[0].find_elements_by_tag_name("span")[1].text)
 
-		return [numberResult, artigos_list, published_list]
+			return [numberResult, artigos_list, published_list]
+		except:
+			return [0, [], []]
 
 	def is_element_present(self, how, what):
 

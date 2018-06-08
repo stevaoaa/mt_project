@@ -43,19 +43,22 @@ class Scidirect(unittest.TestCase):
         element = driver.find_element_by_xpath("//button[@type='submit']")
         driver.execute_script("arguments[0].click();", element)
 
-        numResults = locale.atoi(driver.find_element_by_css_selector("span.search-body-results-text").text)
-        numResultsPage = int(driver.find_elements_by_class_name("SearchNavigation")[0].find_elements_by_class_name("active-per-page")[0].text)
+        try:
+            numResults = locale.atoi(driver.find_element_by_css_selector("span.search-body-results-text").text)
+            numResultsPage = int(driver.find_elements_by_class_name("SearchNavigation")[0].find_elements_by_class_name("active-per-page")[0].text)
 
-        artigos_list = []
-        published_list = []
-     
-        for i in range(0, numResultsPage):
+            artigos_list = []
+            published_list = []
 
-            resultItems = driver.find_elements_by_class_name("ResultList")[0].find_elements_by_class_name("ResultItem")[i]
-            artigos_list.append(resultItems.find_elements_by_tag_name("a")[0].text)
-            published_list.append(resultItems.find_elements_by_class_name("subtype-srctitle-link")[0].text)
-       
-        return [numResults, artigos_list, published_list]
+            for i in range(0, numResultsPage):
+
+                resultItems = driver.find_elements_by_class_name("ResultList")[0].find_elements_by_class_name("ResultItem")[i]
+                artigos_list.append(resultItems.find_elements_by_tag_name("a")[0].text)
+                published_list.append(resultItems.find_elements_by_class_name("subtype-srctitle-link")[0].text)
+
+            return [numResults, artigos_list, published_list]
+        except:
+            return [0, [], []]
         
 
     def is_element_present(self, how, what):

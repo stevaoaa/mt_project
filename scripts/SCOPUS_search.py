@@ -43,25 +43,28 @@ class Scopus(unittest.TestCase):
         artigos_list = []
         published_list = []
 
-        numResultados_source = locale.atoi(driver.find_element_by_class_name("resultsCount").text)
-        trFirstResult = driver.find_element_by_id("resultDataRow0")
-        tBodyResults = driver.find_element_by_id("srchResultsList").find_element_by_tag_name("tbody").find_elements_by_class_name("searchArea")
-        
-        for result in tBodyResults:
-            artigos_list.append(result.find_elements_by_tag_name("td")[0].find_elements_by_tag_name("a")[0].text)
-            try:
-                published_list.append((result.find_elements_by_tag_name("td")[3].find_elements_by_tag_name("a")[0].text))
-            except:
-                strf = result.find_elements_by_tag_name("td")[3].text
-                var =  ""   
+        try:
+            numResultados_source = locale.atoi(driver.find_element_by_class_name("resultsCount").text)
+            trFirstResult = driver.find_element_by_id("resultDataRow0")
+            tBodyResults = driver.find_element_by_id("srchResultsList").find_element_by_tag_name("tbody").find_elements_by_class_name("searchArea")
 
-                for c in strf:
-                    if (c.isdigit()):
-                        break
-                var = var + c          
-                published_list.append(var)
+            for result in tBodyResults:
+                artigos_list.append(result.find_elements_by_tag_name("td")[0].find_elements_by_tag_name("a")[0].text)
+                try:
+                    published_list.append((result.find_elements_by_tag_name("td")[3].find_elements_by_tag_name("a")[0].text))
+                except:
+                    strf = result.find_elements_by_tag_name("td")[3].text
+                    var =  ""
 
-        return [numResultados_source, artigos_list, published_list] 
+                    for c in strf:
+                        if (c.isdigit()):
+                            break
+                    var = var + c
+                    published_list.append(var)
+
+            return [numResultados_source, artigos_list, published_list]
+        except:
+            return [0, [], []]
 
     def is_element_present(self, how, what):
         try:

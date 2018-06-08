@@ -13,7 +13,7 @@ driver = webdriver.Chrome(source_dir)
 strings_Busca = ["\"Software Testing\"", "\"Oracle\""]
 
 for iCount in range(len(strings_Busca)):
-    obj = ACM(strings_Busca[iCount], driver)
+    obj = IEEE(strings_Busca[iCount], driver)
     results = []
-    results = obj.test_ACM()
+    results = obj.test_IEEE()
     print(results)
