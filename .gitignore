@@ -1,5 +1,6 @@
 /dataset/keywords.csv
 __pycache__
+.*
 *.pyc
 *.log
 venv/
