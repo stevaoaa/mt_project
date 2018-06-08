@@ -18,6 +18,7 @@ import sys
 class IEEE():
 
     def __init__(self, stringBusca, webDriver):
+        locale.setlocale(locale.LC_ALL, 'en_US.UTF8')
         self.stringBusca = stringBusca
         self.webDriver = webDriver
 
