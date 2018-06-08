@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import locale
+import unittest, time, re
 
 from importlib import reload
 from selenium import webdriver
@@ -9,13 +10,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
-import unittest, time, re
+
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 import sys
 
-class IEEE():
+class IEEE(unittest.TestCase):
 
     def __init__(self, stringBusca, webDriver):
         locale.setlocale(locale.LC_ALL, 'en_US.UTF8')
@@ -40,8 +41,13 @@ class IEEE():
         driver.get(self.base_url)
 
         driver.find_element_by_css_selector("#command-search-tab > a > span").click()
-        driver.find_element_by_id("expression-textarea").clear()
+
+        import time
+        time.sleep(5)
+
+        driver.find_element_by_id("expression-textarea").clear()        
         driver.find_element_by_id("expression-textarea").send_keys(self.stringBusca)
+
         element = driver.find_element_by_id("submit-search")
         driver.execute_script("arguments[0].click();", element)
 
@@ -75,8 +81,6 @@ class IEEE():
             result.find_elements_by_class_name("col-22-24")[0].find_elements_by_class_name("description")[
                 0].find_elements_by_tag_name("a")[0].get_attribute("innerHTML").replace("[::", "").replace("::]", "")
             published_list.append(publishedFollowUP)
-
-        self.tearDown()
         
         return [numberResult, artigos_list, published_list] 
 
@@ -108,5 +112,8 @@ class IEEE():
 
     def tearDown(self):
         self.driver.quit()
+        self.assertEqual([], self.verificationErrors)
 
 
+if __name__ == "__main__":
+    unittest.main()
