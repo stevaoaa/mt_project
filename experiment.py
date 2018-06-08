@@ -4,7 +4,6 @@
 import os
 import sys
 import csv
-import datetime  
 
 #selenium
 from selenium import webdriver
@@ -12,72 +11,102 @@ from selenium import webdriver
 
 #local
 import util
-from scripts.ACM_search import ACM
-from scripts.IEEE_search import IEEE
-from scripts.Springer_search import Springer
-from scripts.SCOPUS_search import Scopus
-from scripts.Scidirect_search import Scidirect
+import metamorphic_relations
+
 
 """
     run source and follow_up queries and store results in a file
 """
-def source_followup_execution(dataset_file, results_file, engine, driver):
+def execute_query(dataset_file, results_file, engine, m_relation, driver):
     
-    #get the time using a specific format
-    starting_time = datetime.datetime.now().strftime('%H:%M:%S')
-
+    keywords = []
     results = []
-
+    
     #open dataset file
     with open(dataset_file, "r") as dataset:
 
         #get keywords
         keywords = util.random_keywords(dataset) 
-        print (keywords)
-        #gathering results for any metamorphic relation
-            
+
+
+    #gathering results for any metamorphic relation      
 
     if engine == "ACM":
 
-        #source search
-        source_string = util.create_search_string(keywords, engine)
+        if m_relation == "MPublished":
+            results = metamorphic_relations.MPublished(engine, keywords, driver)
 
-        #create the bot
-        acm_bot = ACM(source_string,driver)
+        if m_relation == "MPTitle":
+            pass
 
-        #get the source query results
-        source_results = acm_bot.test_ACM()
-        
-        #get the first paper from source query
-        papers_list = source_results[1]
-        first_paper = papers_list[0]
-        print(source_results[0])
-        
-        #generate the followup string
-        follow_string = util.create_search_string(keywords, engine, first_paper)
+        if (m_relation == "MPReverseJD") or (m_relation == "SwapJD"):
+            pass
 
-        #create the bot
-        acm_bot = ACM(follow_string, driver)
-
-        #run the followup query
-        follow_up_results = acm_bot.test_ACM()
-        print(follow_up_results[0])
-
+        if m_relation == "Top1Absent":
+            pass
 
     if engine == "IEEE":
-        pass
+        
+        if m_relation == "MPublished":
+            results = metamorphic_relations.MPublished(engine, keywords, driver)
+
+        if m_relation == "MPTitle":
+            pass
+
+        if (m_relation == "MPReverseJD") or (m_relation == "SwapJD"):
+            pass
+
+        if m_relation == "Top1Absent":
+            pass
+
 
     if engine == "Scidirect":
-        pass
+        
+        if m_relation == "MPublished":
+            results = metamorphic_relations.MPublished(engine, keywords, driver)
+
+        if m_relation == "MPTitle":
+            pass
+
+        if (m_relation == "MPReverseJD") or (m_relation == "SwapJD"):
+            pass
+
+        if m_relation == "Top1Absent":
+            pass
+
 
     if engine == "SCOPUS":
-        pass
+        
+        if m_relation == "MPublished":
+            results = metamorphic_relations.MPublished(engine, keywords, driver)
 
-    #begging of the operation
-    results.append(starting_time)
+        if m_relation == "MPTitle":
+            pass
+
+        if (m_relation == "MPReverseJD") or (m_relation == "SwapJD"):
+            pass
+
+        if m_relation == "Top1Absent":
+            pass
+
+
+    if engine == "Springer":
+        
+        if m_relation == "MPublished":
+            results = metamorphic_relations.MPublished(engine, keywords, driver)
+
+        if m_relation == "MPTitle":
+            pass
+
+        if (m_relation == "MPReverseJD") or (m_relation == "SwapJD"):
+            pass
+
+        if m_relation == "Top1Absent":
+            pass
+
 
     #saving results into CSV file
-    with open(results_file, "wb") as sheet_results:
+    with open(results_file, "a") as sheet_results:
         out = csv.writer(sheet_results, delimiter=',',quoting=csv.QUOTE_ALL)
         out.writerow(results)
 
@@ -91,7 +120,7 @@ if __name__ == '__main__':
     driver = webdriver.Chrome(source_dir)
 
     dataset_file = os.getcwd() + "/dataset/keywords_sample.csv"
-    results_file = os.getcwd() + "misa_gato.csv"
+    results_file = os.getcwd() + "/misa_gato.csv"
 
     #run a test 
-    source_followup_execution(dataset_file, results_file,"ACM",driver)
+    execute_query(dataset_file, results_file,"IEEE", "MPublished", driver)
