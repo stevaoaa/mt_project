@@ -337,7 +337,7 @@ def Top1Absent(engine, keywords, driver):
     if engine == "Springer":
         follow_up_results = springer_bot.test_springer()
 
-    if engine == "SCOPUS":
+    if engine == "Scopus":
         follow_up_results = scopus_bot.test_Scopus()
     
     #papers from follow up query
