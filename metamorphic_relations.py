@@ -23,220 +23,80 @@ def MPublished(engine, keywords, driver):
 
     results = []
 
+    #source search
+    source_string = util.create_search_string(keywords, engine)
+
+    #create the bots
+    acm_bot = ACM(source_string,driver)
+    ieee_bot = IEEE(source_string,driver)
+    scidirect_bot = Scidirect(source_string,driver)
+    scopus_bot = Scopus(source_string,driver)
+    springer_bot = Springer(source_string,driver)
+
+    #get the source query results
     if engine == "ACM":
-        
-        #source search
-        source_string = util.create_search_string(keywords, engine)
-
-        #create the bot
-        acm_bot = ACM(source_string,driver)
-
-        #get the source query results
         source_results = acm_bot.test_ACM()
-        
-        #get the first paper from source query
-        source_papers = source_results[1]
-        first_paper = source_papers[0]
-        
-        #get the conference of the first paper
-        conferences_list = source_results[2]
-        first_conference = conferences_list[0]
-
-        #generate the followup string
-        follow_string = util.create_search_string(keywords, engine, conference= first_conference)
-
-        #create a new instance of the bot
-        acm_bot = ACM(follow_string, driver)
-
-        #run the followup query
-        follow_up_results = acm_bot.test_ACM()
-
-        #papers from follow up query
-        followup_papers = follow_up_results[1]
-
-        if first_paper in followup_papers:
-
-            #working good
-            fault = False
-        else:
-            #there is a bug
-            fault = True
-
-        results = source_results + follow_up_results + [fault] + [starting_time]
-
-        return results
 
     if engine == "IEEE":
-        
-        #source search
-        source_string = util.create_search_string(keywords, engine)
-
-        #create the bot
-        ieee_bot = IEEE(source_string,driver)
-
-        #get the source query results
         source_results = ieee_bot.test_IEEE()
 
-        #get the first paper from source query
-        source_papers = source_results[1]
-        first_paper = source_papers[0]
-
-        #get the conference of the first paper
-        conferences_list = source_results[2]
-        first_conference = conferences_list[0]
-
-        #generate the followup string
-        follow_string = util.create_search_string(keywords, engine, conference= first_conference)
-
-        #create a new instance of the bot
-        ieee_bot = IEEE(follow_string, driver)
-
-        #run the followup query
-        follow_up_results = ieee_bot.test_IEEE()
-        print(follow_up_results)
-        #papers from follow up query
-        followup_papers = follow_up_results[1]
-
-        if first_paper in followup_papers:
-
-            #working good
-            fault = False
-        else:
-            #there is a bug
-            fault = True
-
-        results = source_results + follow_up_results + [fault] + [starting_time]
-
-        return results
-
     if engine == "Scidirect":
-        
-        #source search
-        source_string = util.create_search_string(keywords, engine)
-
-        #create the bot
-        acm_bot = ACM(source_string,driver)
-
-        #get the source query results
-        source_results = acm_bot.test_ACM()
-        
-        #get the first paper from source query
-        source_papers = source_results[1]
-        first_paper = source_papers[0]
-        
-        #get the conference of the first paper
-        conferences_list = source_results[2]
-        first_conference = conferences_list[0]
-
-        #generate the followup string
-        follow_string = util.create_search_string(keywords, engine, conference= first_conference)
-
-        #create a new instance of the bot
-        acm_bot = ACM(follow_string, driver)
-
-        #run the followup query
-        follow_up_results = acm_bot.test_ACM()
-
-        #papers from follow up query
-        followup_papers = follow_up_results[1]
-
-        if first_paper in followup_papers:
-
-            #working good
-            fault = False
-        else:
-            #there is a bug
-            fault = True
-
-        results = source_results + follow_up_results + [fault] + [starting_time]
-
-        return results
+        source_results = scidirect_bot.test_scidirect()
 
     if engine == "Springer":
-        
-        #source search
-        source_string = util.create_search_string(keywords, engine)
-
-        #create the bot
-        acm_bot = ACM(source_string,driver)
-
-        #get the source query results
-        source_results = acm_bot.test_ACM()
-        
-        #get the first paper from source query
-        source_papers = source_results[1]
-        first_paper = source_papers[0]
-        
-        #get the conference of the first paper
-        conferences_list = source_results[2]
-        first_conference = conferences_list[0]
-
-        #generate the followup string
-        follow_string = util.create_search_string(keywords, engine, conference= first_conference)
-
-        #create a new instance of the bot
-        acm_bot = ACM(follow_string, driver)
-
-        #run the followup query
-        follow_up_results = acm_bot.test_ACM()
-
-        #papers from follow up query
-        followup_papers = follow_up_results[1]
-
-        if first_paper in followup_papers:
-
-            #working good
-            fault = False
-        else:
-            #there is a bug
-            fault = True
-
-        results = source_results + follow_up_results + [fault] + [starting_time]
-
-        return results
+        source_results = springer_bot.test_springer()
 
     if engine == "SCOPUS":
+        source_results = scopus_bot.test_Scopus()
+
+    #get the first paper from source query
+    source_papers = source_results[1]
+    first_paper = source_papers[0]
     
-        #source search
-        source_string = util.create_search_string(keywords, engine)
+    #get the conference of the first paper
+    conferences_list = source_results[2]
+    first_conference = conferences_list[0]
 
-        #create the bot
-        acm_bot = ACM(source_string,driver)
+    #generate the followup string
+    follow_string = util.create_search_string(keywords, engine, conference= first_conference)
 
-        #get the source query results
-        source_results = acm_bot.test_ACM()
-        
-        #get the first paper from source query
-        source_papers = source_results[1]
-        first_paper = source_papers[0]
-        
-        #get the conference of the first paper
-        conferences_list = source_results[2]
-        first_conference = conferences_list[0]
+    #create a new instance of the bots
+    acm_bot = ACM(follow_string, driver)
+    ieee_bot = IEEE(follow_string, driver)
+    scidirect_bot = Scidirect(follow_string, driver)
+    scopus_bot = Scopus(follow_string, driver)
+    springer_bot = Springer(follow_string, driver)
 
-        #generate the followup string
-        follow_string = util.create_search_string(keywords, engine, conference= first_conference)
 
-        #create a new instance of the bot
-        acm_bot = ACM(follow_string, driver)
-
-        #run the followup query
+    #get the followup query results
+    if engine == "ACM":
         follow_up_results = acm_bot.test_ACM()
 
-        #papers from follow up query
-        followup_papers = follow_up_results[1]
+    if engine == "IEEE":
+        follow_up_results = ieee_bot.test_IEEE()
 
-        if first_paper in followup_papers:
+    if engine == "Scidirect":
+        follow_up_results = scidirect_bot.test_scidirect()
 
-            #working good
-            fault = False
-        else:
-            #there is a bug
-            fault = True
+    if engine == "Springer":
+        follow_up_results = springer_bot.test_springer()
 
-        results = source_results + follow_up_results + [fault] + [starting_time]
+    if engine == "SCOPUS":
+        follow_up_results = scopus_bot.test_Scopus()
+    
+    #papers from follow up query
+    followup_papers = follow_up_results[1]
 
-        return results
+    if first_paper in followup_papers:
+        #working good
+        fault = False
+    else:
+        #there is a bug
+        fault = True
+
+    results = [source_string] + source_results + [follow_string] + follow_up_results + [fault] + [starting_time]
+
+    return results
 
 
 def MPTitle(parameter_list):
