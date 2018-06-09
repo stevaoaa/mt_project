@@ -55,7 +55,7 @@ if __name__ == '__main__':
     #build driver path
     base_dir = '/home/stevao/workspace'
     source_dir = base_dir + '/mt_project/scripts/drivers/chromedriver'
-    driver = webdriver.Chrome(source_dir)
+    driver = webdriver.Chrome(os.getcwd() + '\\util\\chromedriver')
 
     dataset_file = os.getcwd() + "/dataset/keywords_sample.csv"
     
@@ -81,7 +81,7 @@ if __name__ == '__main__':
 
     #creating a result file
     name = engine + '_' + relation + '.csv'
-    results_file = os.getcwd() + '/results/' + name
+    results_file = os.getcwd() + name
 
     #run a test with 20 queries
     for i in range(20):

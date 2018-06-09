@@ -8,7 +8,7 @@ from Springer_search import Springer
 base_dir = '/home/stevao/workspace'
 source_dir = base_dir + '/mt_project/scripts/drivers/chromedriver'
 
-driver = webdriver.Chrome(source_dir)
+driver = webdriver.Chrome(os.getcwd() + '\\util\\chromedriver')
 
 strings_Busca = ["\"Software Testing\"", "\"Oracle\""]
 
