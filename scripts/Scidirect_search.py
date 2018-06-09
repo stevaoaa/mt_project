@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+#local
+import util
+
 import locale
 
 from importlib import reload
@@ -55,7 +58,11 @@ class Scidirect(unittest.TestCase):
                 resultItems = driver.find_elements_by_class_name("ResultList")[0].find_elements_by_class_name("ResultItem")[i]
                 artigos_list.append(resultItems.find_elements_by_tag_name("a")[0].text)
                 published_list.append(resultItems.find_elements_by_class_name("subtype-srctitle-link")[0].text)
-
+            
+            #remove possible HTML markups
+            artigos_list = [util.remove_html_markup(x) for x in artigos_list]
+            published_list = [util.remove_html_markup(x) for x in published_list]
+            
             return [numResults, artigos_list, published_list]
         except:
             return [0, [], []]

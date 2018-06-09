@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+#local
+import util
+
+import sys
 import locale
 
 from importlib import reload
@@ -11,7 +15,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
-import sys
+
 
 class ACM(unittest.TestCase):
 
@@ -58,7 +62,11 @@ class ACM(unittest.TestCase):
 				trFirstResult = driver.find_elements_by_id("results")[0].find_elements_by_class_name("details")[i]
 				artigos_list.append(trFirstResult.find_elements_by_class_name("title")[0].find_elements_by_tag_name("a")[0].text)
 				published_list.append(trFirstResult.find_elements_by_class_name("source")[0].find_elements_by_tag_name("span")[1].text)
-
+			
+			#remove possible HTML markups
+			artigos_list = [util.remove_html_markup(x) for x in artigos_list]
+			published_list = [util.remove_html_markup(x) for x in published_list]
+			
 			return [numberResult, artigos_list, published_list]
 		except:
 			return [0, [], []]

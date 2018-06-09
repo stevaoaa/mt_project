@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+#local
+import util
+
 import locale
 
 from importlib import reload
@@ -62,6 +65,10 @@ class Scopus(unittest.TestCase):
                     var = var + c
                     published_list.append(var)
 
+            #remove possible HTML markups
+            artigos_list = [util.remove_html_markup(x) for x in artigos_list]
+            published_list = [util.remove_html_markup(x) for x in published_list]
+            
             return [numResultados_source, artigos_list, published_list]
         except:
             return [0, [], []]
