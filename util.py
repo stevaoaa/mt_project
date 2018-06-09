@@ -150,5 +150,25 @@ def create_search_string(keywords, engine, title= False, conference = False):
             search_string = engines.spring_string(keywords)
         
         return search_string
-    
 
+
+"""
+    Remove HTML tags from results (it occours on IEEE results)
+    Udacity solution: https://www.youtube.com/watch?v=HPkNPcYed9M&feature=youtu.be&t=35s
+"""
+def remove_html_markup(s):
+    
+    tag = False
+    quote = False
+    out = ""
+
+    for c in s:
+            if c == '<' and not quote:
+                tag = True
+            elif c == '>' and not quote:
+                tag = False
+            elif (c == '"' or c == "'") and tag:
+                quote = not quote
+            elif not tag:
+                out = out + c
+    return out
