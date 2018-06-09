@@ -81,7 +81,7 @@ if __name__ == '__main__':
 
     #creating a result file
     name = engine + '_' + relation + '.csv'
-    results_file = os.getcwd() + name
+    results_file = os.getcwd() + '/results/' + name
 
     #run a test with 20 queries
     for i in range(20):
