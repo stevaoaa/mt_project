@@ -31,79 +31,17 @@ def execute_query(dataset_file, results_file, engine, m_relation, driver):
 
     #gathering results for any metamorphic relation      
 
-    if engine == "ACM":
+    if m_relation == "MPublished":
+        results = metamorphic_relations.MPublished(engine, keywords, driver)
 
-        if m_relation == "MPublished":
-            results = metamorphic_relations.MPublished(engine, keywords, driver)
+    if m_relation == "MPTitle":
+        results = metamorphic_relations.MPTitle(engine, keywords, driver)
 
-        if m_relation == "MPTitle":
-            pass
+    if (m_relation == "MPReverseJD") or (m_relation == "SwapJD"):
+        results = metamorphic_relations.MPReverseJD_SwapJD(engine, keywords, driver)
 
-        if (m_relation == "MPReverseJD") or (m_relation == "SwapJD"):
-            pass
-
-        if m_relation == "Top1Absent":
-            pass
-
-    if engine == "IEEE":
-        
-        if m_relation == "MPublished":
-            results = metamorphic_relations.MPublished(engine, keywords, driver)
-
-        if m_relation == "MPTitle":
-            pass
-
-        if (m_relation == "MPReverseJD") or (m_relation == "SwapJD"):
-            pass
-
-        if m_relation == "Top1Absent":
-            pass
-
-
-    if engine == "Scidirect":
-        
-        if m_relation == "MPublished":
-            results = metamorphic_relations.MPublished(engine, keywords, driver)
-
-        if m_relation == "MPTitle":
-            pass
-
-        if (m_relation == "MPReverseJD") or (m_relation == "SwapJD"):
-            pass
-
-        if m_relation == "Top1Absent":
-            pass
-
-
-    if engine == "SCOPUS":
-        
-        if m_relation == "MPublished":
-            results = metamorphic_relations.MPublished(engine, keywords, driver)
-
-        if m_relation == "MPTitle":
-            pass
-
-        if (m_relation == "MPReverseJD") or (m_relation == "SwapJD"):
-            pass
-
-        if m_relation == "Top1Absent":
-            pass
-
-
-    if engine == "Springer":
-        
-        if m_relation == "MPublished":
-            results = metamorphic_relations.MPublished(engine, keywords, driver)
-
-        if m_relation == "MPTitle":
-            pass
-
-        if (m_relation == "MPReverseJD") or (m_relation == "SwapJD"):
-            pass
-
-        if m_relation == "Top1Absent":
-            pass
-
+    if m_relation == "Top1Absent":
+        results = metamorphic_relations.Top1Absent(engine, keywords, driver)
 
     #saving results into CSV file
     with open(results_file, "a") as sheet_results:
@@ -120,7 +58,31 @@ if __name__ == '__main__':
     driver = webdriver.Chrome(source_dir)
 
     dataset_file = os.getcwd() + "/dataset/keywords_sample.csv"
-    results_file = os.getcwd() + "/misa_gato.csv"
+    
+    engines = ["ACM", "IEEE", "Scidirect", "Scopus", "Springer"]
+    relations = ["MPublished", "MPTitle", "MPReverseJD", "SwapJD","Top1Absent"] 
 
-    #run a test 
-    execute_query(dataset_file, results_file,"IEEE", "MPublished", driver)
+    #Verify the execution
+    if len(sys.argv) < 3:
+        print('Usage: python experiment.py engine, relation')
+        sys.exit(-1)
+
+
+    engine    = str(sys.argv[1]) #engine used
+    relation  = str(sys.argv[2]) #metamorphic relation
+    
+    if engine not in engines:
+        print('Please use a valid engine: ', engines)
+        sys.exit(-1)
+
+    if relation not in relations:
+        print('Please use a valid metamorphic relation: ', relations)
+        sys.exit(-1)
+
+    #creating a result file
+    name = engine + '_' + relation + '.csv'
+    results_file = os.getcwd() + name
+
+    #run a test with 20 queries
+    for i in range(20):
+        execute_query(dataset_file, results_file,engine, relation, driver)
