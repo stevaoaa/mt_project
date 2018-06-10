@@ -49,7 +49,7 @@ def MPublished(engine, keywords, driver):
     if engine == "Springer":
         source_results = springer_bot.test_springer()
 
-    if engine == "SCOPUS":
+    if engine == "Scopus":
         source_results = scopus_bot.test_Scopus()
 
     #get the first paper from source query
