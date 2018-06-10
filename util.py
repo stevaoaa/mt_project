@@ -125,7 +125,7 @@ def create_search_string(keywords, engine, title= False, conference = False):
                 
         return search_string
 
-    if engine == "SCOPUS":
+    if engine == "Scopus":
 
         if title:
             search_string = engines.scopus_string(keywords, title = title)

@@ -85,7 +85,7 @@ def MPublished(engine, keywords, driver):
     if engine == "Springer":
         follow_up_results = springer_bot.test_springer()
 
-    if engine == "SCOPUS":
+    if engine == "Scopus":
         follow_up_results = scopus_bot.test_Scopus()
     
     #papers from follow up query
@@ -135,7 +135,7 @@ def MPTitle(engine, keywords, driver):
     if engine == "Springer":
         source_results = springer_bot.test_springer()
 
-    if engine == "SCOPUS":
+    if engine == "Scopus":
         source_results = scopus_bot.test_Scopus()
 
     #get the first paper from source query
@@ -171,7 +171,7 @@ def MPTitle(engine, keywords, driver):
     if engine == "Springer":
         follow_up_results = springer_bot.test_springer()
 
-    if engine == "SCOPUS":
+    if engine == "Scopus":
         follow_up_results = scopus_bot.test_Scopus()
     
     #papers from follow up query
@@ -222,7 +222,7 @@ def MPReverseJD_SwapJD(engine, keywords, driver):
     if engine == "Springer":
         source_results = springer_bot.test_springer()
 
-    if engine == "SCOPUS":
+    if engine == "Scopus":
         source_results = scopus_bot.test_Scopus()
     
     #shufle the keywords
@@ -254,7 +254,7 @@ def MPReverseJD_SwapJD(engine, keywords, driver):
     if engine == "Springer":
         follow_up_results = springer_bot.test_springer()
 
-    if engine == "SCOPUS":
+    if engine == "Scopus":
         follow_up_results = scopus_bot.test_Scopus()
 
 
@@ -313,7 +313,7 @@ def Top1Absent(engine, keywords, driver):
     if engine == "Springer":
         source_results = springer_bot.test_springer()
 
-    if engine == "SCOPUS":
+    if engine == "Scopus":
         source_results = scopus_bot.test_Scopus()
 
     #get the first paper from source query
