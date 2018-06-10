@@ -17,7 +17,8 @@ import unittest, time, re
 class Scidirect(unittest.TestCase):
 
     def __init__(self, stringBusca, webDriver):
-        locale.setlocale(locale.LC_ALL, 'en_US.UTF8')
+        #locale.setlocale(locale.LC_ALL, 'en_US.UTF8')
+        locale.setlocale(locale.LC_ALL, 'English_United States.1252')
         self.stringBusca = stringBusca
         self.webDriver = webDriver
 
