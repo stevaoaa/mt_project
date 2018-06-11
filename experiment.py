@@ -53,11 +53,11 @@ def execute_query(dataset_file, results_file, engine, m_relation, driver):
 if __name__ == '__main__':
     
     #build driver path
-    base_dir = '/home/stevao/workspace'
-    source_dir = base_dir + '/mt_project/scripts/drivers/chromedriver'
-    driver = webdriver.Chrome(os.getcwd() + '\\util\\chromedriver')
+    base_dir = '/home/stevao/workspace/mt_project'
+    driver_path = base_dir + '/scripts/drivers/chromedriver'
+    driver = webdriver.Chrome(driver_path)
 
-    dataset_file = os.getcwd() + "/dataset/keywords_sample.csv"
+    dataset_file = base_dir + "/dataset/keywords_sample.csv"
     
     engines = ["ACM", "IEEE", "Scidirect", "Scopus", "Springer"]
     relations = ["MPublished", "MPTitle", "MPReverseJD", "SwapJD","Top1Absent"] 
@@ -80,8 +80,20 @@ if __name__ == '__main__':
         sys.exit(-1)
 
     #creating a result file
-    name = engine + '_' + relation + '.csv'
-    results_file = os.getcwd() + name
+    file_name = engine + '_' + relation + '.csv'
+
+    result_dir = base_dir + '/results'
+
+    #check the directory result..
+    try:
+        #check the status of the dir to generate a exception if it not exists	
+        os.stat(result_dir)
+    except:
+        #when the exception is triged create the directory
+        os.mkdir(result_dir)
+
+    #destination path
+    results_file = result_dir + '/' + file_name
 
     #run a test with 20 queries
     for i in range(20):
