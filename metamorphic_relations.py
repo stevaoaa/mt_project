@@ -34,7 +34,8 @@ def MPublished(engine, keywords, driver):
     scopus_bot = Scopus(source_string,driver)
     springer_bot = Springer(source_string,driver)
 
-    source_results = []
+    #number of results, papers list, conferences list
+    source_results = [0, [], []]
 
     #get the source query results
     if engine == "ACM":
@@ -70,7 +71,7 @@ def MPublished(engine, keywords, driver):
     scopus_bot = Scopus(follow_string, driver)
     springer_bot = Springer(follow_string, driver)
 
-    follow_up_results = []
+    follow_up_results = [0, [], []]
 
     #get the followup query results
     if engine == "ACM":
@@ -120,7 +121,7 @@ def MPTitle(engine, keywords, driver):
     scopus_bot = Scopus(source_string,driver)
     springer_bot = Springer(source_string,driver)
 
-    source_results = []
+    source_results = [0, [], []]
 
     #get the source query results
     if engine == "ACM":
@@ -156,7 +157,7 @@ def MPTitle(engine, keywords, driver):
     scopus_bot = Scopus(follow_string, driver)
     springer_bot = Springer(follow_string, driver)
 
-    follow_up_results = []
+    follow_up_results = [0, [], []]
 
     #get the followup query results
     if engine == "ACM":
@@ -207,7 +208,7 @@ def MPReverseJD_SwapJD(engine, keywords, driver):
     scopus_bot = Scopus(source_string,driver)
     springer_bot = Springer(source_string,driver)
 
-    source_results = []
+    source_results = [0, [], []]
 
     #get the source query results
     if engine == "ACM":
@@ -239,7 +240,7 @@ def MPReverseJD_SwapJD(engine, keywords, driver):
     scopus_bot = Scopus(follow_string, driver)
     springer_bot = Springer(follow_string, driver)
 
-    follow_up_results = []
+    follow_up_results = [0, [], []]
 
     #get the followup query results
     if engine == "ACM":
@@ -298,7 +299,7 @@ def Top1Absent(engine, keywords, driver):
     scopus_bot = Scopus(source_string,driver)
     springer_bot = Springer(source_string,driver)
 
-    source_results = []
+    source_results = [0, [], []]
 
     #get the source query results
     if engine == "ACM":
@@ -334,7 +335,7 @@ def Top1Absent(engine, keywords, driver):
     scopus_bot = Scopus(follow_string, driver)
     springer_bot = Springer(follow_string, driver)
 
-    follow_up_results = []
+    follow_up_results = [0, [], []]
 
     #get the followup query results
     if engine == "ACM":
