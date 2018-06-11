@@ -64,8 +64,8 @@ class ACM(unittest.TestCase):
 				published_list.append(trFirstResult.find_elements_by_class_name("source")[0].find_elements_by_tag_name("span")[1].text)
 			
             #remove possible HTML markups and HTML Codes
-            artigos_list = util.format_results(artigos_list)
-            published_list = util.format_results(published_list)
+			artigos_list = util.format_results(artigos_list)
+			published_list = util.format_results(published_list)
 			
 			return [numberResult, artigos_list, published_list]
 		except:
