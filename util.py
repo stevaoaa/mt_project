@@ -5,6 +5,8 @@ import csv
 import re
 import random
 
+import html.parser
+
 from datetime import datetime
 from datetime import timedelta
 
@@ -172,3 +174,29 @@ def remove_html_markup(s):
             elif not tag:
                 out = out + c
     return out
+
+
+"""
+    Given a list, for each element remove HTML tags and decode ASCII characters 
+"""
+def format_results(unformated_results):
+
+    formated_results = []
+    for entry in unformated_results:
+        
+        #remove HTML tags
+        entry = remove_html_markup(entry)
+        
+        #convert HTML ASCII codes
+        """
+            ("'", '&#39;'),
+            ('"', '&quot;'),
+            ('>', '&gt;'),
+            ('<', '&lt;'),
+            ('&', '&amp;')
+        """ 
+        entry = html.parser(entry)
+
+        formated_results.append(entry)
+
+    return formated_results
