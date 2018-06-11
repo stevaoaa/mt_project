@@ -195,8 +195,7 @@ def format_results(unformated_results):
             ('<', '&lt;'),
             ('&', '&amp;')
         """ 
-        entry = html.parser(entry)
-
+        entry = html.parser.unescape(entry)
         formated_results.append(entry)
 
     return formated_results
