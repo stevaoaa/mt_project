@@ -54,9 +54,9 @@ class Springer(unittest.TestCase):
                 artigos_list.append(result.find_elements_by_tag_name("h2")[0].find_elements_by_tag_name("a")[0].text)
                 published_list.append(result.find_elements_by_class_name("meta")[0].find_elements_by_class_name("enumeration")[0].text)
 
-            #remove possible HTML markups
-            artigos_list = [util.remove_html_markup(x) for x in artigos_list]
-            published_list = [util.remove_html_markup(x) for x in published_list]
+            #remove possible HTML markups and HTML Codes
+            artigos_list = util.format_results(artigos_list)
+            published_list = util.format_results(published_list)
 
             return [numberResult, artigos_list, published_list]
         except:

@@ -90,9 +90,9 @@ class IEEE(unittest.TestCase):
                         "::]", "")
                 published_list.append(publishedFollowUP)
             
-            #remove possible HTML markups
-            artigos_list = [util.remove_html_markup(x) for x in artigos_list]
-            published_list = [util.remove_html_markup(x) for x in published_list]
+            #remove possible HTML markups and HTML Codes
+            artigos_list = util.format_results(artigos_list)
+            published_list = util.format_results(published_list)
 
             return [numberResult, artigos_list, published_list]
         except:
