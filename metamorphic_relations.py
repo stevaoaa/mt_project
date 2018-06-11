@@ -52,14 +52,23 @@ def MPublished(engine, keywords, driver):
 
     if engine == "Scopus":
         source_results = scopus_bot.test_Scopus()
-
-    #get the first paper from source query
-    source_papers = source_results[1]
-    first_paper = source_papers[0]
     
-    #get the conference of the first paper
+    #get the list of papers and conferences from source query
+    source_papers = source_results[1]
     conferences_list = source_results[2]
-    first_conference = conferences_list[0]
+    
+    
+    #surround by try to avoid exceptions
+    try:
+        #get the first paper name 
+        first_paper = source_papers[0]
+    except:
+        first_paper = ''
+    try:
+        #conference of the first paper
+        first_conference = conferences_list[0]
+    except:
+        first_conference = ''
 
     #generate the followup string
     follow_string = util.create_search_string(keywords, engine, conference= first_conference)
@@ -90,7 +99,10 @@ def MPublished(engine, keywords, driver):
         follow_up_results = scopus_bot.test_Scopus()
     
     #papers from follow up query
-    followup_papers = follow_up_results[1]
+    try:
+        followup_papers = follow_up_results[1]
+    except:
+        followup_papers = []
 
     if first_paper in followup_papers:
         #working good
@@ -139,13 +151,22 @@ def MPTitle(engine, keywords, driver):
     if engine == "Scopus":
         source_results = scopus_bot.test_Scopus()
 
-    #get the first paper from source query
+    #get the list of papers and conferences from source query
     source_papers = source_results[1]
-    first_paper = source_papers[0]
-    
-    #get the conference of the first paper
     conferences_list = source_results[2]
-    first_conference = conferences_list[0]
+    
+    
+    #surround by try to avoid exceptions
+    try:
+        #get the first paper name 
+        first_paper = source_papers[0]
+    except:
+        first_paper = ''
+    try:
+        #conference of the first paper
+        first_conference = conferences_list[0]
+    except:
+        first_conference = ''
 
     #generate the followup string
     follow_string = util.create_search_string(keywords, engine, title= first_paper)
@@ -176,7 +197,10 @@ def MPTitle(engine, keywords, driver):
         follow_up_results = scopus_bot.test_Scopus()
     
     #papers from follow up query
-    followup_papers = follow_up_results[1]
+    try:
+        followup_papers = follow_up_results[1]
+    except:
+        followup_papers = []
 
     if first_paper in followup_papers:
         #working good
@@ -260,12 +284,24 @@ def MPReverseJD_SwapJD(engine, keywords, driver):
 
 
     #get the first paper from source query
-    num_source = source_results[0]
-    source_papers = source_results[1]
+    try:
+        num_source = source_results[0]
+    except:
+        num_source = 0
+    try:
+        source_papers = source_results[1]
+    except:
+        source_papers = []
     
     #get followup results
-    num_followup = follow_up_results[0]
-    followup_papers = follow_up_results[1]
+    try:
+        num_followup = follow_up_results[0]
+    except:
+        num_followup = 0
+    try:
+        followup_papers = follow_up_results[1]
+    except:
+        followup_papers = []
     
     #If the number of results is diferent then found a anomaly
     if num_source == num_followup:
@@ -317,13 +353,22 @@ def Top1Absent(engine, keywords, driver):
     if engine == "Scopus":
         source_results = scopus_bot.test_Scopus()
 
-    #get the first paper from source query
+    #get the list of papers and conferences from source query
     source_papers = source_results[1]
-    first_paper = source_papers[0]
-    
-    #get the conference of the first paper
     conferences_list = source_results[2]
-    first_conference = conferences_list[0]
+    
+    
+    #surround by try to avoid exceptions
+    try:
+        #get the first paper name 
+        first_paper = source_papers[0]
+    except:
+        first_paper = ''
+    try:
+        #conference of the first paper
+        first_conference = conferences_list[0]
+    except:
+        first_conference = ''
 
     #generate the followup string
     follow_string = util.create_search_string(keywords, engine, title= first_paper)
@@ -354,7 +399,10 @@ def Top1Absent(engine, keywords, driver):
         follow_up_results = scopus_bot.test_Scopus()
     
     #papers from follow up query
-    followup_papers = follow_up_results[1]
+    try:
+        followup_papers = follow_up_results[1]
+    except:
+        followup_papers = []
 
     #check if the first paper of both query is equal
     if first_paper == followup_papers[0]:
