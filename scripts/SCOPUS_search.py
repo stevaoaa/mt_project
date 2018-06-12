@@ -39,9 +39,18 @@ class Scopus(unittest.TestCase):
 
         driver = self.driver
         driver.get(self.base_url)
+        
+        try:
+            driver.find_element_by_id("clearLink").click()
+        except:
+            pass
 
         driver.find_element_by_id("searchfield").send_keys(self.stringBusca)
         element = driver.find_element_by_id("advSearch")
+
+        import time
+        time.sleep(5)
+
         driver.execute_script("arguments[0].click();", element)
         artigos_list = []
         published_list = []
