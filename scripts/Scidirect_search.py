@@ -47,9 +47,14 @@ class Scidirect(unittest.TestCase):
         driver.execute_script("arguments[0].click();", element)
 
         try:
-            numResults = locale.atoi(driver.find_element_by_css_selector("span.search-body-results-text").text)
-            numResultsPage = int(driver.find_elements_by_class_name("SearchNavigation")[0].find_elements_by_class_name("active-per-page")[0].text)
 
+            numResults = driver.find_element_by_css_selector("span.search-body-results-text").text
+            numResults = locale.atoi(numResults.split()[0])
+
+            numResultsPage = driver.find_elements_by_class_name("SearchNavigation")[0].find_elements_by_class_name("active-per-page")[0].text
+            numResultsPage = locale.atoi(numResultsPage.split()[0])
+            print("Numero resultados: ",numResults)
+            print("Resultados por pagina: ", numResultsPage)
             artigos_list = []
             published_list = []
 
@@ -58,13 +63,15 @@ class Scidirect(unittest.TestCase):
                 resultItems = driver.find_elements_by_class_name("ResultList")[0].find_elements_by_class_name("ResultItem")[i]
                 artigos_list.append(resultItems.find_elements_by_tag_name("a")[0].text)
                 published_list.append(resultItems.find_elements_by_class_name("subtype-srctitle-link")[0].text)
-            
+
             #remove possible HTML markups and HTML Codes
             artigos_list = util.format_results(artigos_list)
             published_list = util.format_results(published_list)
-            
+
             return [numResults, artigos_list, published_list]
-        except:
+        except Exception as e:
+            print("E: Exception while extracting Science Direct information!")
+            print(e)
             return [0, [], []]
         
 

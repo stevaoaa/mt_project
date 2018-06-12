@@ -70,7 +70,9 @@ class Scopus(unittest.TestCase):
             published_list = util.format_results(published_list)
             
             return [numResultados_source, artigos_list, published_list]
-        except:
+        except Exception as e:
+            print("E: Exception while extracting Scopus information!")
+            print(e)
             return [0, [], []]
 
     def is_element_present(self, how, what):

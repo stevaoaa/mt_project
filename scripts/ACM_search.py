@@ -68,7 +68,9 @@ class ACM(unittest.TestCase):
 			published_list = util.format_results(published_list)
 			
 			return [numberResult, artigos_list, published_list]
-		except:
+		except Exception as e:
+			print("E: Exception while extracting ACM information!")
+			print(e)
 			return [0, [], []]
 
 	def is_element_present(self, how, what):
