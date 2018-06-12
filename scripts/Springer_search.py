@@ -58,6 +58,10 @@ class Springer(unittest.TestCase):
             artigos_list = util.format_results(artigos_list)
             published_list = util.format_results(published_list)
 
+            #remove (content inside parenthesis) of published list to avoid break follow-up query
+            import re
+            published_list = [re.sub(r" ?\([^)]+\)", "", item) for item in published_list]
+
             return [numberResult, artigos_list, published_list]
         except Exception as e:
             print("E: Exception while extracting Springer information!")
