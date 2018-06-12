@@ -54,17 +54,17 @@ def spring_string(keywords, title= None, conference = None):
     terms = terms.join('"{0}"'.format(w) for w in keywords)    
 
     #IEEE or Springer
-    springer = "source-query (%s)" % (terms)
+    springer = "(%s)" % (terms)
     
     if title:        
 
-        springer = "source-query (%s)" % (terms)
+        springer = "(%s)" % (terms)
         complement = " AND (title: \"%s\")"  % (title)
         springer = springer + complement
 
     if conference:        
 
-        springer = "source-query (%s)" % (terms)
+        springer = "(%s)" % (terms)
         complement = " AND (publication-title: \"%s\")"  % (conference)
         springer = springer + complement
 
@@ -77,7 +77,7 @@ def sciente_direct_string(keywords, title = None, conference = None):
     terms = ' OR '
     terms = terms.join('Title-Abstr-Key('"{0}"') '.format(w) for w in keywords)
     
-    direct = "source-query "  + terms    
+    direct =  terms    
 
     if title:        
 
