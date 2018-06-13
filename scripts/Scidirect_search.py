@@ -54,6 +54,9 @@ class Scidirect(unittest.TestCase):
 
             numResultsPage = driver.find_elements_by_class_name("SearchNavigation")[0].find_elements_by_class_name("active-per-page")[0].text
             numResultsPage = locale.atoi(numResultsPage.split()[0])
+            if numResults < numResultsPage:
+                numResultsPage = numResults
+
             print("Numero resultados: ",numResults)
             print("Resultados por pagina: ", numResultsPage)
             artigos_list = []
