@@ -49,11 +49,6 @@ class Scidirect(unittest.TestCase):
 
         try:
 
-            resultsFound = driver.find_element_by_class_name("status-message")
-            if resultsFound:
-                if "No results found" in resultsFound.text:
-                    return [0, [], []]
-
             numResults = driver.find_element_by_css_selector("span.search-body-results-text").text
             numResults = locale.atoi(numResults.split()[0])
 

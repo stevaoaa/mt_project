@@ -44,7 +44,7 @@ def execute_query(dataset_file, results_file, engine, m_relation, driver):
         results = metamorphic_relations.Top1Absent(engine, keywords, driver)
 
     #saving results into CSV file
-    with open(results_file, "a") as sheet_results:
+    with open(results_file, "a", encoding='utf-8') as sheet_results:
         out = csv.writer(sheet_results, delimiter=',',quoting=csv.QUOTE_ALL)
         out.writerow(results)
 
@@ -53,7 +53,7 @@ def execute_query(dataset_file, results_file, engine, m_relation, driver):
 if __name__ == '__main__':
     
     #build driver path
-    base_dir = '/home/stevao/workspace/mt_project'
+    base_dir = os.getcwd()
     driver_path = base_dir + '/scripts/drivers/chromedriver'
     driver = webdriver.Chrome(driver_path)
 
