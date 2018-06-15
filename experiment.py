@@ -4,6 +4,7 @@
 import os
 import sys
 import csv
+import locale
 
 #selenium
 from selenium import webdriver
@@ -52,6 +53,9 @@ def execute_query(dataset_file, results_file, engine, m_relation, driver):
 
 if __name__ == '__main__':
     
+    locale.setlocale(locale.LC_ALL, 'en_US.UTF8')
+    #locale.setlocale(locale.LC_ALL, 'English_United States.1252')    
+
     #build driver path
     base_dir = os.getcwd()
     driver_path = base_dir + '/scripts/drivers/chromedriver'
