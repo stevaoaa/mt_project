@@ -51,15 +51,21 @@ class Springer(unittest.TestCase):
             published_list = []
 
             for result in tBodyResults:
-                type_public = result.find_elements_by_class_name("content-type")[0].text
-                
-                if type_public != "Book":
-                    artigos_list.append(result.find_elements_by_tag_name("h2")[0].find_elements_by_tag_name("a")[0].text)
-                    eleme1 = result.find_elements_by_class_name("meta")[0].find_elements_by_class_name("enumeration")[0]
-                    elem2 = eleme1.find_elements_by_tag_name("a")[0].get_attribute("title")
-                    published_list.append(elem2)
-                else:
+                if (len(result.find_elements_by_class_name("content-type")) == 0):
                     numberResult -= 1
+                else: 
+                    type_public = result.find_elements_by_class_name("content-type")[0].text
+                
+                    if type_public != "Book":
+                        artigos_list.append(result.find_elements_by_tag_name("h2")[0].find_elements_by_tag_name("a")[0].text)
+                        if (len(result.find_elements_by_class_name("meta")) == 0):
+                            published_list.append('')
+                        else:
+                            eleme1 = result.find_elements_by_class_name("meta")[0].find_elements_by_class_name("enumeration")[0]
+                            elem2 = eleme1.find_elements_by_tag_name("a")[0].get_attribute("title")
+                            published_list.append(elem2)
+                    else:
+                        numberResult -= 1
 
             #remove (content inside parenthesis) of published list to avoid break follow-up query
             import re
