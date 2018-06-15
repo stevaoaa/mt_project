@@ -79,6 +79,7 @@ class ACM(unittest.TestCase):
 		try:
 			self.driver.find_element(by=how, value=what)
 		except NoSuchElementException as e:
+			print(e)
 			return False
 		return True
 
@@ -87,6 +88,7 @@ class ACM(unittest.TestCase):
 		try:
 			self.driver.switch_to_alert()
 		except NoAlertPresentException as e:
+			print(e)
 			return False
 		return True
 

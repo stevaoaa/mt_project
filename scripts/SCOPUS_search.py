@@ -57,7 +57,7 @@ class Scopus(unittest.TestCase):
 
         try:
             numResultados_source = locale.atoi(driver.find_element_by_class_name("resultsCount").text)
-            trFirstResult = driver.find_element_by_id("resultDataRow0")
+            #trFirstResult = driver.find_element_by_id("resultDataRow0")
             tBodyResults = driver.find_element_by_id("srchResultsList").find_element_by_tag_name("tbody").find_elements_by_class_name("searchArea")
 
             for result in tBodyResults:
@@ -88,6 +88,7 @@ class Scopus(unittest.TestCase):
         try:
             self.driver.find_element(by=how, value=what)
         except NoSuchElementException as e:
+            print(e)
             return False
         return True
 
@@ -95,6 +96,7 @@ class Scopus(unittest.TestCase):
         try:
             self.driver.switch_to_alert()
         except NoAlertPresentException as e:
+            print(e)
             return False
         return True
 

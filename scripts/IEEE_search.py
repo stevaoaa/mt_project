@@ -4,6 +4,7 @@
 import util
 
 import locale
+
 import unittest, time, re
 
 from importlib import reload
@@ -59,12 +60,11 @@ class IEEE(unittest.TestCase):
 
         try:
             numberResult = locale.atoi(driver.find_element_by_xpath("//div[@id='xplResultsContainer']/section/div[2]/div/span/span[2]").text)
-            numResultPage = driver.find_element_by_css_selector("span.ng-scope > span.strong.ng-binding").text
-
-            nPage1 = numResultPage.find("-")
-            nPage2 = numResultPage[nPage1 + 1:nPage1 + 3]
-
-            numberResultPage = int(nPage2)
+            
+            #numResultPage = driver.find_element_by_css_selector("span.ng-scope > span.strong.ng-binding").text
+            #nPage1 = numResultPage.find("-")
+            #nPage2 = numResultPage[nPage1 + 1:nPage1 + 3]
+            #numberResultPage = int(nPage2)
 
             artigos_list = []
             published_list = []
@@ -105,6 +105,7 @@ class IEEE(unittest.TestCase):
         try:
             self.driver.find_element(by=how, value=what)
         except NoSuchElementException as e:
+            print(e)
             return False
         return True
 
@@ -112,6 +113,7 @@ class IEEE(unittest.TestCase):
         try:
             self.driver.switch_to_alert()
         except NoAlertPresentException as e:
+            print(e)
             return False
         return True
 
