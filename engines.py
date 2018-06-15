@@ -97,7 +97,7 @@ def acm_string(keywords, title = None, conference = None):
     terms = ' OR '
     terms = terms.join('((acmdlTitle:(+"{0}") OR recordAbstract:(+"{0}") OR keywords.author.keyword:(+"{0}"))'.format(w) for w in keywords)    
     
-    acm = "source-query "  + terms
+    acm = terms
 
     if title:        
 
