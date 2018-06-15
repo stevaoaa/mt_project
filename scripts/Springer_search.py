@@ -44,7 +44,7 @@ class Springer(unittest.TestCase):
 
         try:
             numberResult = locale.atoi(driver.find_elements_by_tag_name("h1")[0].find_elements_by_tag_name("strong")[0].text)
-
+            
             tBodyResults = driver.find_elements_by_id("results-list")[0].find_elements_by_tag_name("li")
             artigos_list = []
             published_list = []
@@ -60,9 +60,15 @@ class Springer(unittest.TestCase):
                         if (len(result.find_elements_by_class_name("meta")) == 0):
                             published_list.append('')
                         else:
-                            eleme1 = result.find_elements_by_class_name("meta")[0].find_elements_by_class_name("enumeration")[0]
-                            elem2 = eleme1.find_elements_by_tag_name("a")[0].get_attribute("title")
-                            published_list.append(elem2)
+                            if (len(result.find_elements_by_class_name("meta")[0].find_elements_by_class_name("enumeration")) == 0):
+                                numberResult -= 1
+                            else:
+                                eleme1 = result.find_elements_by_class_name("meta")[0].find_elements_by_class_name("enumeration")[0]
+                                if (len(eleme1.find_elements_by_tag_name("a")) == 0):
+                                    numberResult -= 1
+                                else:
+                                    elem2 = eleme1.find_elements_by_tag_name("a")[0].get_attribute("title")
+                                    published_list.append(elem2)
                     else:
                         numberResult -= 1
 
