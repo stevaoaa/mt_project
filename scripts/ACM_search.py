@@ -70,7 +70,7 @@ class ACM(unittest.TestCase):
 			
 			return [numberResult, artigos_list, published_list]
 		except Exception as e:
-			print("E: Exception while extracting ACM information!")
+			print("E: Exception while extracting ACM information!\n{string}".format(string = self.stringBusca))
 			print(e)
 			return [0, [], []]
 

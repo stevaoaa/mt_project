@@ -73,7 +73,7 @@ class Springer(unittest.TestCase):
 
             return [numberResult, artigos_list, published_list]
         except Exception as e:
-            print("E: Exception while extracting Springer information!")
+            print("E: Exception while extracting Springer information!\n{string}".format(string = self.stringBusca))
             print(e)
             return [0, [], []]
     

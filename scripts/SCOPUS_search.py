@@ -49,7 +49,6 @@ class Scopus(unittest.TestCase):
         driver.find_element_by_id("searchfield").send_keys(self.stringBusca)
         element = driver.find_element_by_id("advSearch")
 
-        import time
         time.sleep(5)
 
         driver.execute_script("arguments[0].click();", element)
@@ -81,7 +80,7 @@ class Scopus(unittest.TestCase):
             
             return [numResultados_source, artigos_list, published_list]
         except Exception as e:
-            print("E: Exception while extracting Scopus information!")
+            print("E: Exception while extracting Scopus information!\n{string}".format(string = self.stringBusca))
             print(e)
             return [0, [], []]
 
