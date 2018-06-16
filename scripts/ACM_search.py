@@ -44,9 +44,10 @@ class ACM(unittest.TestCase):
 		if (not (driver.find_element_by_id("therunqueryedit").is_displayed())):
 			driver.find_element_by_id("vh").click()
 		driver.find_element_by_id("therunqueryedit").send_keys(self.stringBusca)
+		time.sleep(2)
 		driver.find_element_by_name("Go").click()
 
-		try:
+		try:			
 			trFirstResult = driver.find_elements_by_id("results")[0].find_elements_by_class_name("details")[0]
 			trNumberResult = driver.find_elements_by_id("resultstats")[0].find_elements_by_id("resfound")[0]
 			numberResult = locale.atoi(trNumberResult.find_elements_by_id("searchtots")[0].find_elements_by_tag_name("strong")[0].text)
@@ -61,7 +62,10 @@ class ACM(unittest.TestCase):
 			for i in range(0,numberResultPage):
 				trFirstResult = driver.find_elements_by_id("results")[0].find_elements_by_class_name("details")[i]
 				artigos_list.append(trFirstResult.find_elements_by_class_name("title")[0].find_elements_by_tag_name("a")[0].text)
-				published_list.append(trFirstResult.find_elements_by_class_name("source")[0].find_elements_by_tag_name("span")[1].text)
+				if (len(trFirstResult.find_elements_by_class_name("source")[0].find_elements_by_tag_name("span")) < 2):
+					numberResult -= 1
+				else:
+					published_list.append(trFirstResult.find_elements_by_class_name("source")[0].find_elements_by_tag_name("span")[1].text)
 			
             #remove possible HTML markups and HTML Codes
 			artigos_list = util.format_results(artigos_list)
