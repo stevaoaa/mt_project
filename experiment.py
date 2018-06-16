@@ -58,7 +58,7 @@ if __name__ == '__main__':
 
     #build driver path
     base_dir = os.getcwd()
-    driver_path = base_dir + '/scripts/drivers/chromedriver'
+    driver_path = base_dir + '/util/drivers/chromedriver'
     driver = webdriver.Chrome(driver_path)
 
     dataset_file = base_dir + "/dataset/keywords_sample.csv"
