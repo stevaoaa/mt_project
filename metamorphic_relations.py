@@ -37,8 +37,6 @@ def MPublished(engine, keywords, driver):
     #number of results, papers list, conferences list
     source_results = []
 
-    print("Runing Source Query:")
-
     #get the source query results
     if engine == "ACM":
         source_results = acm_bot.test_ACM()
@@ -83,8 +81,6 @@ def MPublished(engine, keywords, driver):
     springer_bot = Springer(follow_string, driver)
 
     follow_up_results = []
-
-    print("Follow-up Query:")
 
     #get the followup query results
     if engine == "ACM":

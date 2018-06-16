@@ -6,6 +6,8 @@ import sys
 import csv
 import locale
 
+import time
+
 #selenium
 from selenium import webdriver
 
@@ -61,7 +63,7 @@ if __name__ == '__main__':
     driver_path = base_dir + '/scripts/drivers/chromedriver'
     driver = webdriver.Chrome(driver_path)
 
-    dataset_file = base_dir + "/dataset/keywords_sample.csv"
+    dataset_file = base_dir + "/dataset/keywords.csv"
     
     engines = ["ACM", "IEEE", "Scidirect", "Scopus", "Springer"]
     relations = ["MPublished", "MPTitle", "MPReverseJD", "SwapJD","Top1Absent"] 
@@ -100,5 +102,9 @@ if __name__ == '__main__':
     results_file = result_dir + '/' + file_name
 
     #run a test with 20 queries
-    for i in range(20):
+    iteration = 1
+    while True:
+        print("Engine: %s | Relation: %s | Iteration: %d" % (engine, relation, iteration))
         execute_query(dataset_file, results_file,engine, relation, driver)
+        iteration = iteration + 1
+        time.sleep(5)
