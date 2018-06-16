@@ -404,8 +404,13 @@ def Top1Absent(engine, keywords, driver):
     except:
         followup_papers = []
 
+    try:
+        first_followup_paper = follow_up_results[1]
+    except:
+        first_followup_paper = ''
+
     #check if the first paper of both query is equal
-    if first_paper == followup_papers[0]:
+    if (first_paper == first_followup_paper) and (first_paper != ''):
         #working good
         fault = False
     else:
