@@ -14,9 +14,10 @@ def check_similarity(source, follow_up):
     
     source_list = util.file_in_list(source)
     follow_up_list = util.file_in_list(follow_up)
-
-    jaccard = jaccard_similarity_score(source_list, follow_up_list)
-
+    try:
+        jaccard = jaccard_similarity_score(source_list, follow_up_list)
+    except:
+        jaccard = 0
     return jaccard
 
 """

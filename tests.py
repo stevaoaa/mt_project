@@ -117,8 +117,12 @@ def test_create_search_string():
 
 def test_run_a_query(engine, keywords, driver):
     
+    title = 'Simple example'
+
     #generate string
     source_string = util.create_search_string(keywords, engine)
+
+    print("String: ", source_string)
 
     #create the bots
     acm_bot = ACM(source_string,driver)
@@ -145,12 +149,11 @@ def test_run_a_query(engine, keywords, driver):
     if engine == "Scopus":
         source_results = scopus_bot.test_Scopus()
 
-    print(source_results)
 
 if __name__ == '__main__':
     
     #parameters
-    engine = "Springer"
+    engine = "ACM"
     keywords = ["Adaptive system", "Computer science", "Computer virus", "Electrical engineering"]
     
     #build driver path
@@ -159,3 +162,4 @@ if __name__ == '__main__':
     driver = webdriver.Chrome(driver_path)
 
     test_run_a_query(engine, keywords, driver)
+    

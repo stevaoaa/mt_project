@@ -107,4 +107,3 @@ if __name__ == '__main__':
         print("Engine: %s | Relation: %s | Iteration: %d" % (engine, relation, iteration))
         execute_query(dataset_file, results_file,engine, relation, driver)
         iteration = iteration + 1
-        time.sleep(5)

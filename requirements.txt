@@ -1,4 +1,6 @@
 numpy
 scipy
+pandas
 selenium
+matplotlib
 scikit-learn

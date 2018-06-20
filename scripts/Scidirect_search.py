@@ -56,8 +56,6 @@ class Scidirect(unittest.TestCase):
             if numResults < numResultsPage:
                 numResultsPage = numResults
 
-            print("Numero resultados: ",numResults)
-            print("Resultados por pagina: ", numResultsPage)
             artigos_list = []
             published_list = []
 

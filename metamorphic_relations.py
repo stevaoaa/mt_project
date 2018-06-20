@@ -171,6 +171,8 @@ def MPTitle(engine, keywords, driver):
     #generate the followup string
     follow_string = util.create_search_string(keywords, engine, title= first_paper)
 
+    print("Follow String: ", follow_string)
+
     #create a new instance of the bots
     acm_bot = ACM(follow_string, driver)
     ieee_bot = IEEE(follow_string, driver)

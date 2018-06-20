@@ -100,13 +100,12 @@ def acm_string(keywords, title = None, conference = None):
     acm = terms
 
     if title:        
-
         complement = " AND (acmdlTitle:(+\"%s\"))" % (title)
         acm = acm + complement
 
     if conference:        
-
         complement = " AND (\"publication name\":(\"%s\"))" % (conference)
         acm = acm + complement
 
     return acm
+    

@@ -87,34 +87,38 @@ def calculate_elapsed_time(s1, s2):
     return tdelta
 
 
-def create_search_string(keywords, engine, title= False, conference = False):
+def create_search_string(keywords, engine, title = None, conference = None):
     
     if engine == "ACM":
+
+        if ((not title) and (not conference)):
+            search_string = engines.acm_string(keywords)
+        
         if title:
             search_string = engines.acm_string(keywords, title = title)
 
         if conference:
             search_string = engines.acm_string(keywords, conference = conference)
-
-        else:
-            search_string = engines.acm_string(keywords)
         
         return search_string
 
     if engine == "IEEE":
+
+        if ((not title) and (not conference)):
+            search_string = engines.acm_string(keywords)
 
         if title:
             search_string = engines.ieee_string(keywords, title = title)
 
         if conference:
             search_string = engines.ieee_string(keywords, conference = conference)
-
-        else:
-            search_string = engines.ieee_string(keywords)
                 
         return search_string
 
     if engine == "Scidirect":
+
+        if ((not title) and (not conference)):
+            search_string = engines.acm_string(keywords)        
 
         if title:
             search_string = engines.sciente_direct_string(keywords, title = title)
@@ -122,25 +126,25 @@ def create_search_string(keywords, engine, title= False, conference = False):
         if conference:
             search_string = engines.sciente_direct_string(keywords, conference = conference)
 
-        else:
-            search_string = engines.sciente_direct_string(keywords)
-                
         return search_string
 
     if engine == "Scopus":
+
+        if ((not title) and (not conference)):
+            search_string = engines.acm_string(keywords)
 
         if title:
             search_string = engines.scopus_string(keywords, title = title)
 
         if conference:
             search_string = engines.scopus_string(keywords, conference = conference)
-
-        else:
-            search_string = engines.scopus_string(keywords)
         
         return search_string
 
     if engine == "Springer":
+
+        if ((not title) and (not conference)):
+            search_string = engines.acm_string(keywords)
 
         if title:
             search_string = engines.spring_string(keywords, title = title)
@@ -148,9 +152,6 @@ def create_search_string(keywords, engine, title= False, conference = False):
         if conference:
             search_string = engines.spring_string(keywords, conference = conference)
 
-        else:
-            search_string = engines.spring_string(keywords)
-        
         return search_string
 
 
@@ -199,3 +200,4 @@ def format_results(unformated_results):
         formated_results.append(entry)
 
     return formated_results
+    
