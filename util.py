@@ -105,7 +105,7 @@ def create_search_string(keywords, engine, title = None, conference = None):
     if engine == "IEEE":
 
         if ((not title) and (not conference)):
-            search_string = engines.acm_string(keywords)
+            search_string = engines.ieee_string(keywords)
 
         if title:
             search_string = engines.ieee_string(keywords, title = title)
@@ -118,7 +118,7 @@ def create_search_string(keywords, engine, title = None, conference = None):
     if engine == "Scidirect":
 
         if ((not title) and (not conference)):
-            search_string = engines.acm_string(keywords)        
+            search_string = engines.sciente_direct_string(keywords)        
 
         if title:
             search_string = engines.sciente_direct_string(keywords, title = title)
@@ -131,7 +131,7 @@ def create_search_string(keywords, engine, title = None, conference = None):
     if engine == "Scopus":
 
         if ((not title) and (not conference)):
-            search_string = engines.acm_string(keywords)
+            search_string = engines.scopus_string(keywords)
 
         if title:
             search_string = engines.scopus_string(keywords, title = title)
@@ -144,7 +144,7 @@ def create_search_string(keywords, engine, title = None, conference = None):
     if engine == "Springer":
 
         if ((not title) and (not conference)):
-            search_string = engines.acm_string(keywords)
+            search_string = engines.spring_string(keywords)
 
         if title:
             search_string = engines.spring_string(keywords, title = title)
