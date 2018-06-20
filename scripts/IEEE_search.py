@@ -72,8 +72,13 @@ class IEEE(unittest.TestCase):
             WebDriverWait(driver, 10).until(expected_conditions.presence_of_element_located((By.CLASS_NAME, "article-list")))
 
             # List-results-items
-            numArtigos_Pagina = int(
-                str(driver.find_elements_by_xpath("//span[@class='strong ng-binding']")[0].text)[2:])
+            if (len(driver.find_elements_by_xpath("//span[@class='strong ng-binding']")) > 0):
+                numArtigos_Pagina = int(
+                    str(driver.find_elements_by_xpath("//span[@class='strong ng-binding']")[0].text)[2:])
+            else:
+                numArtigos_Pagina = int(
+                    str(driver.find_elements_by_xpath("//span[@class='strong']")[0].text))
+
             while (len(driver.find_elements_by_class_name("List-results-items")) < numArtigos_Pagina):
                 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
