@@ -90,6 +90,12 @@ def MPublished(engine, keywords, driver):
         follow_up_results = ieee_bot.test_IEEE()
 
     if engine == "Scidirect":
+
+        #Scidirect limitation.. Strings bigger than 255 chars are not suported. End the execution and sent a False value to not registre the entry
+        if(len(follow_string) > 255):
+            print("W: Follow-up string exceeds the allowed size limit for the base! This execution will be aborted and will not be logged.")
+            return [], False
+        
         follow_up_results = scidirect_bot.test_scidirect()
 
     if engine == "Springer":
@@ -113,7 +119,8 @@ def MPublished(engine, keywords, driver):
 
     results = [source_string] + source_results + [follow_string] + follow_up_results + [fault] + [starting_time]
 
-    return results
+    #add an extra return value to ensure that the execution runned as expected
+    return results, True
 
 
 def MPTitle(engine, keywords, driver):
@@ -188,6 +195,12 @@ def MPTitle(engine, keywords, driver):
         follow_up_results = ieee_bot.test_IEEE()
 
     if engine == "Scidirect":
+
+        #Scidirect limitation.. Strings bigger than 255 chars are not suported. End the execution and sent a False value to not registre the entry
+        if(len(follow_string) > 255):
+            print("W: Follow-up string exceeds the allowed size limit for the base! This execution will be aborted and will not be logged.")
+            return [], False        
+        
         follow_up_results = scidirect_bot.test_scidirect()
 
     if engine == "Springer":
@@ -211,7 +224,8 @@ def MPTitle(engine, keywords, driver):
 
     results = [source_string] + source_results + [follow_string] + follow_up_results + [fault] + [starting_time]
 
-    return results
+    #add an extra return value to ensure that the execution runned as expected
+    return results, True
 
 
 
@@ -274,6 +288,12 @@ def MPReverseJD_SwapJD(engine, keywords, driver):
         follow_up_results = ieee_bot.test_IEEE()
 
     if engine == "Scidirect":
+
+        #Scidirect limitation.. Strings bigger than 255 chars are not suported. End the execution and sent a False value to not registre the entry
+        if(len(follow_string) > 255):
+            print("W: Follow-up string exceeds the allowed size limit for the base! This execution will be aborted and will not be logged.")
+            return [], False
+
         follow_up_results = scidirect_bot.test_scidirect()
 
     if engine == "Springer":
@@ -314,7 +334,8 @@ def MPReverseJD_SwapJD(engine, keywords, driver):
 
     results = [source_string] + source_results + [follow_string] + follow_up_results + [anon] + [jaccard] + [starting_time]
 
-    return results
+    #add an extra return value to ensure that the execution runned as expected
+    return results, True
 
 
 
@@ -390,6 +411,12 @@ def Top1Absent(engine, keywords, driver):
         follow_up_results = ieee_bot.test_IEEE()
 
     if engine == "Scidirect":
+
+        #Scidirect limitation.. Strings bigger than 255 chars are not suported. End the execution and sent a False value to not registre the entry
+        if(len(follow_string) > 255):
+            print("W: Follow-up string exceeds the allowed size limit for the base! This execution will be aborted and will not be logged.")
+            return [], False
+                
         follow_up_results = scidirect_bot.test_scidirect()
 
     if engine == "Springer":
@@ -419,4 +446,5 @@ def Top1Absent(engine, keywords, driver):
 
     results = [source_string] + source_results + [follow_string] + follow_up_results + [fault] + [starting_time]
 
-    return results
+    #add an extra return value to ensure that the execution runned as expected
+    return results, True

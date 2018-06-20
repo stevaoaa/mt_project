@@ -117,10 +117,10 @@ def test_create_search_string():
 
 def test_run_a_query(engine, keywords, driver):
     
-    title = 'Simple example'
+    title = 'Need a bigger string to simulate a cenario that that exceeds the maximum size allowed by the search base science direct'
 
     #generate string
-    source_string = util.create_search_string(keywords, engine)
+    source_string = util.create_search_string(keywords, engine, title= title)
 
     print("String: ", source_string)
 
@@ -153,7 +153,7 @@ def test_run_a_query(engine, keywords, driver):
 if __name__ == '__main__':
     
     #parameters
-    engine = "ACM"
+    engine = "Scidirect"
     keywords = ["Adaptive system", "Computer science", "Computer virus", "Electrical engineering"]
     
     #build driver path

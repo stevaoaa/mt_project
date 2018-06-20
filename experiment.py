@@ -35,21 +35,23 @@ def execute_query(dataset_file, results_file, engine, m_relation, driver):
     #gathering results for any metamorphic relation      
 
     if m_relation == "MPublished":
-        results = metamorphic_relations.MPublished(engine, keywords, driver)
+        results, condition = metamorphic_relations.MPublished(engine, keywords, driver)
 
     if m_relation == "MPTitle":
-        results = metamorphic_relations.MPTitle(engine, keywords, driver)
+        results, condition = metamorphic_relations.MPTitle(engine, keywords, driver)
 
     if (m_relation == "MPReverseJD") or (m_relation == "SwapJD"):
-        results = metamorphic_relations.MPReverseJD_SwapJD(engine, keywords, driver)
+        results, condition = metamorphic_relations.MPReverseJD_SwapJD(engine, keywords, driver)
 
     if m_relation == "Top1Absent":
-        results = metamorphic_relations.Top1Absent(engine, keywords, driver)
+        results, condition = metamorphic_relations.Top1Absent(engine, keywords, driver)
 
-    #saving results into CSV file
-    with open(results_file, "a", encoding='utf-8') as sheet_results:
-        out = csv.writer(sheet_results, delimiter=',',quoting=csv.QUOTE_ALL)
-        out.writerow(results)
+    #condition is a boolean value that stands if the execution happened as expected (we abort executions that went worong. Eg.: Scidirect strings > 255 chars)
+    if condition:
+        #saving results into CSV file
+        with open(results_file, "a", encoding='utf-8') as sheet_results:
+            out = csv.writer(sheet_results, delimiter=',',quoting=csv.QUOTE_ALL)
+            out.writerow(results)
 
     
 
