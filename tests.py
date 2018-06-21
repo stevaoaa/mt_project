@@ -12,8 +12,8 @@ from selenium import webdriver
 
 #local
 import util
-import engines
-import statistics
+import engines_string_generator
+from analyzes import metrics 
 
 
 from scripts.ACM_search import ACM
@@ -69,7 +69,7 @@ def test_calculate_elapsed_time():
     print(("Difference between dates: %s") % (delta))
 
     
-#statistics.py tests
+#metrics.py tests
 def test_check_similarity():
     
     path_file = os.getcwd() + "/dataset/keywords_sample.csv"
@@ -78,7 +78,7 @@ def test_check_similarity():
         alist = util.file_in_list(afile)
 
     #calculate jaccard wit a list and the same list reversed. Should be lower
-    jaccard = statistics.check_similarity(alist, alist[::-1])
+    jaccard = metrics.check_similarity(alist, alist[::-1])
     print(("Jaccard Coefficient: %s") % (jaccard)) 
 
 
@@ -99,19 +99,19 @@ def test_create_search_string():
     with open(path_file, "r") as afile:
         keywords = util.random_keywords(afile)
 
-        result = engines.ieee_string(keywords,title="Some title of test")
+        result = engines_string_generator.ieee_string(keywords,title="Some title of test")
         print("IEEE|Springer String: %s" % (result))
 
-        result = engines.spring_string(keywords,title="Some title of test")
+        result = engines_string_generator.spring_string(keywords,title="Some title of test")
         print("Springer String: %s" % (result))
 
-        result = engines.scopus_string(keywords,title="Some title of test")
+        result = engines_string_generator.scopus_string(keywords,title="Some title of test")
         print("Scopus String: %s" % (result))
 
-        result = engines.sciente_direct_string(keywords,title="Some title of test")
+        result = engines_string_generator.sciente_direct_string(keywords,title="Some title of test")
         print("Science Direct String: %s" % (result))
 
-        result = engines.acm_string(keywords,title="Some title of test")
+        result = engines_string_generator.acm_string(keywords,title="Some title of test")
         print("ACM String: %s" % (result))
 
 
@@ -149,6 +149,12 @@ def test_run_a_query(engine, keywords, driver):
     if engine == "Scopus":
         source_results = scopus_bot.test_Scopus()
 
+def test_check_similarity_from_file():
+    
+    base_dir = os.getcwd()
+    file_path = base_dir + "/dataset/SwapJD_Springer.csv"
+    
+    metrics.check_similarity_from_file(file_path)
 
 if __name__ == '__main__':
     
@@ -159,7 +165,8 @@ if __name__ == '__main__':
     #build driver path
     base_dir = os.getcwd()
     driver_path = base_dir + '/scripts/drivers/chromedriver'
-    driver = webdriver.Chrome(driver_path)
+    #driver = webdriver.Chrome(driver_path)
 
-    test_run_a_query(engine, keywords, driver)
+    #run a execution here
+    test_check_similarity_from_file()
     

@@ -6,7 +6,7 @@ import datetime
 
 #local
 import util
-import statistics
+from  analyzes import metrics
 
 from scripts.ACM_search import ACM
 from scripts.IEEE_search import IEEE
@@ -330,7 +330,7 @@ def MPReverseJD_SwapJD(engine, keywords, driver):
         anon = True
 
     #check similarity from both results
-    jaccard = statistics.check_similarity(source_papers, followup_papers)
+    jaccard = metrics.check_similarity(source_papers, followup_papers)
 
     results = [source_string] + source_results + [follow_string] + follow_up_results + [anon] + [jaccard] + [starting_time]
 

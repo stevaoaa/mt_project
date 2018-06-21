@@ -3,6 +3,9 @@
 
 from sklearn.metrics import jaccard_similarity_score
 
+import ast
+import pandas as pd
+
 #local
 import util
 
@@ -19,6 +22,23 @@ def check_similarity(source, follow_up):
     except:
         jaccard = 0
     return jaccard
+
+"""
+    Just check if the results from swap have the same size (avoid a wrong calculation of jaccard coeficient)
+"""
+def check_similarity_from_file(afile):
+    
+    #read from csv file
+    # model: [source_string, num_results, papers, conferences, follow_string, num_results, papers, conferences, fault, time]
+    my_csv = pd.read_csv(afile, usecols =[2,6], header= None)
+
+    for index, row in my_csv.iterrows():
+        source = ast.literal_eval(row[2])
+        follow = ast.literal_eval(row[2])
+        
+        if len(source) != len(follow):
+            print(len(source), len(follow))
+        
 
 """
     Given a csv result file Calculate ROCOF for each 1 hour interval
@@ -43,10 +63,3 @@ def get_ROCOF(result_file):
         #1 hour should calculate ROCOF with data
         else:
             pass
-
-
-"""
-    Given a csv result file Calculate ROCOA for each 1 hour interval
-"""
-def get_ROCOA(result_file):
-    pass
