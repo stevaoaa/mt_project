@@ -11,7 +11,7 @@ from datetime import datetime
 from datetime import timedelta
 
 #local
-import engines
+import engines_string_generator as engines
 
 """
     (Waterman's "Reservoir Algorithm") from Knuth's "The Art of Computer Programming"
