@@ -47,10 +47,13 @@ class Scidirect(unittest.TestCase):
         driver.execute_script("arguments[0].click();", element)
 
         try:
-
-            numResults = driver.find_element_by_css_selector("span.search-body-results-text").text
+        
+            if (len(driver.find_elements_by_css_selector("span.search-body-results-text")) > 0):
+                numResults = driver.find_element_by_css_selector("span.search-body-results-text").text
+            else:
+                numResults = driver.find_element_by_css_selector("h1.search-body-results-text").text
+            
             numResults = locale.atoi(numResults.split()[0])
-
             numResultsPage = driver.find_elements_by_class_name("SearchNavigation")[0].find_elements_by_class_name("active-per-page")[0].text
             numResultsPage = locale.atoi(numResultsPage.split()[0])
             if numResults < numResultsPage:
