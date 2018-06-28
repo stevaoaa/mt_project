@@ -88,7 +88,7 @@ if __name__ == '__main__':
         sys.exit(-1)
 
     #creating a result file
-    file_name = engine + '_' + relation + '.csv'
+    file_name = relation + '_' + engine + '_' + '.csv'
 
     result_dir = base_dir + '/results'
 
