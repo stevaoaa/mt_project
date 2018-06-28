@@ -52,10 +52,19 @@ if __name__ == '__main__':
 		SciDirect = [0.1333, 0.1000, 0.0667, 0.0667, 0.0000, 0.0333, 0.0333, 0.0667, 0.0333, 0.0667, 0.0333, 0.1000, 0.1333, 0.1667, 0.0000, 0.0000, 0.0667, 0.0667, 0.0000, 0.0667, 0.0333, 0.1000, 0.0000, 0.0667, 0.1667, 0.0333, 0.1000, 0.0000, 0.1000, 0.0667, 0.1000, 0.0667, 0.0000]
 		Springer = [0.1000, 0.0333, 0.0000, 0.0333, 0.0000, 0.0000, 0.0333, 0.0000, 0.0000, 0.0000, 0.0000, 0.0333, 0.0000, 0.0333, 0.0000, 0.0000, 0.1000, 0.0000, 0.0000, 0.0667, 0.0000, 0.0333, 0.0667, 0.0333, 0.0000, 0.0667, 0.0000, 0.0333, 0.1000, 0.0000, 0.0000, 0.0000, 0.0000]
 
-	print(metamorphic_relation)
-	print ('============= ANOVA FOR ACM, IEEE, SciDirect, Springer =============')
+	#print(metamorphic_relation)
+	#print ('============= ANOVA FOR ACM, IEEE, SciDirect, Springer =============')
 	#anova for each configuration
-	f4_value, p4_value = stats.f_oneway(ACM, IEEE, SciDirect, Springer)
+	#f4_value, p4_value = stats.f_oneway(ACM, IEEE, SciDirect, Springer)
+	
+	#if p4_value < 0.01:
+		#print ("f4_value = {f4_value} | p4_value = {p4_value} ".format(f4_value = f4_value, p4_value = p4_value))
+	#print ('====================================================================\n')
+
+
+	print ('============ KRUSKAL FOR ACM, IEEE, SciDirect, Springer ============')
+	#anova for each configuration
+	f4_value, p4_value = stats.kruskal(ACM, IEEE, SciDirect, Springer)
 	
 	if p4_value < 0.01:
 		print ("f4_value = {f4_value} | p4_value = {p4_value} ".format(f4_value = f4_value, p4_value = p4_value))
