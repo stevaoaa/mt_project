@@ -32,16 +32,16 @@ def ieee_string(keywords, title= None, conference = None):
     terms = terms.join('"{0}"'.format(w) for w in keywords)    
 
     #IEEE
-    ieee = "((\"Document Title\":) (\"%s\"))" % (terms)
+    ieee = "((\"Document Title\":\"%s\"))" % (terms)
     if title:        
 
-        ieee = "((\"Document Title\":) (\"%s\"))" % (terms)
+        ieee = "((\"Document Title\":\"%s\"))" % (terms)
         complement = " AND (\"Document Title\": \"%s\")"  % (title)
         ieee = ieee + complement
 
     if conference:
         
-        ieee = "((\"Document Title\":) (\"%s\"))" % (terms)
+        ieee = "((\"Document Title\":\"%s\"))" % (terms)
         complement = " AND (\"Publication Title\": \"%s\")"  % (conference)
         ieee = ieee + complement
 
