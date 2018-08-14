@@ -152,9 +152,10 @@ def test_run_a_query(engine, keywords, driver):
 def test_check_similarity_from_file():
     
     base_dir = os.getcwd()
-    file_path = base_dir + "/dataset/SwapJD_Springer.csv"
+    afile = "Top1_IEEE_CSV.csv"
+    file_path = base_dir + "/dataset/" + afile
     
-    metrics.check_similarity_from_file(file_path)
+    metrics.check_results(file_path)
 
 if __name__ == '__main__':
     
@@ -169,4 +170,3 @@ if __name__ == '__main__':
 
     #run a execution here
     test_check_similarity_from_file()
-    

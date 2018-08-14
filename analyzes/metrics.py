@@ -26,19 +26,25 @@ def check_similarity(source, follow_up):
 """
     Just check if the results from swap have the same size (avoid a wrong calculation of jaccard coeficient)
 """
-def check_similarity_from_file(afile):
+def check_results(afile):
     
     #read from csv file
     # model: [source_string, num_results, papers, conferences, follow_string, num_results, papers, conferences, fault, time]
     my_csv = pd.read_csv(afile, usecols =[2,6], header= None)
-
+    id = 1
     for index, row in my_csv.iterrows():
-        source = ast.literal_eval(row[2])
-        follow = ast.literal_eval(row[2])
+                
+        try:
+            source = ast.literal_eval(row[2])
+            follow = ast.literal_eval(row[6])
+            paper = source[0]
+            if paper not in follow:
+                print("Index: %d" % (id))
+        except:
+            print("Error in: %d" % (id))
         
-        if len(source) != len(follow):
-            print(len(source), len(follow))
-        
+        id = id +1
+
 
 """
     Given a csv result file Calculate ROCOF for each 1 hour interval
