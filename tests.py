@@ -152,7 +152,7 @@ def test_run_a_query(engine, keywords, driver):
 def test_check_similarity_from_file():
     
     base_dir = os.getcwd()
-    file_path = base_dir + "/dataset/SwapJD_Springer.csv"
+    file_path = base_dir + "/dataset/MPShuffleJD_Springer.csv"
     
     metrics.check_similarity_from_file(file_path)
 

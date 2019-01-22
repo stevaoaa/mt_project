@@ -40,8 +40,8 @@ def execute_query(dataset_file, results_file, engine, m_relation, driver):
     if m_relation == "MPTitle":
         results, condition = metamorphic_relations.MPTitle(engine, keywords, driver)
 
-    if (m_relation == "MPReverseJD") or (m_relation == "SwapJD"):
-        results, condition = metamorphic_relations.MPReverseJD_SwapJD(engine, keywords, driver)
+    if (m_relation == "MPReverseJD") or (m_relation == "MPShuffleJD"):
+        results, condition = metamorphic_relations.MPShuffleJD(engine, keywords, driver)
 
     if m_relation == "Top1Absent":
         results, condition = metamorphic_relations.Top1Absent(engine, keywords, driver)
@@ -68,7 +68,7 @@ if __name__ == '__main__':
     dataset_file = base_dir + "/dataset/keywords.csv"
     
     engines = ["ACM", "IEEE", "Scidirect", "Scopus", "Springer"]
-    relations = ["MPublished", "MPTitle", "MPReverseJD", "SwapJD","Top1Absent"] 
+    relations = ["MPublished", "MPTitle", "MPShuffleJD","Top1Absent"] 
 
     #Verify the execution
     if len(sys.argv) < 3:
