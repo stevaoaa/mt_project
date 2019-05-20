@@ -229,7 +229,7 @@ def MPTitle(engine, keywords, driver):
 
 
 
-def MPReverseJD_SwapJD(engine, keywords, driver):
+def MPShuffleJD(engine, keywords, driver):
     
     #get the time using a specific format
     starting_time = datetime.datetime.now().strftime('%H:%M:%S')

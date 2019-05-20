@@ -154,6 +154,7 @@ def test_check_similarity_from_file():
     base_dir = os.getcwd()
     afile = "Top1_IEEE_CSV.csv"
     file_path = base_dir + "/dataset/" + afile
+    file_path = base_dir + "/dataset/MPShuffleJD_Springer.csv"
     
     metrics.check_results(file_path)
 
