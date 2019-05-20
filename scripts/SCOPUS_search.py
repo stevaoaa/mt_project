@@ -5,7 +5,7 @@ import util
 
 import locale
 
-from importlib import reload
+from six.moves import reload_module
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -34,7 +34,7 @@ class Scopus(unittest.TestCase):
 
         self.setUp()
 
-        reload(sys)
+        reload_module(sys)
         # sys.setdefaultencoding('utf8')
 
         driver = self.driver

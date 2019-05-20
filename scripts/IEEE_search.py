@@ -7,7 +7,7 @@ import locale
 
 import unittest, time, re
 
-from importlib import reload
+from six.moves import reload_module
 
 import selenium
 from selenium import webdriver
@@ -41,7 +41,7 @@ class IEEE(unittest.TestCase):
 
         self.setUp()
 
-        reload(sys)
+        reload_module(sys)
         # sys.setdefaultencoding('utf8')
 
         driver = self.driver
