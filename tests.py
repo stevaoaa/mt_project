@@ -152,7 +152,7 @@ def test_run_a_query(engine, keywords, driver):
 def test_check_similarity_from_file():
     
     base_dir = os.getcwd()
-    afile = "Top1_IEEE_v1.csv"
+    afile = "Top1Absent_IEEE_v2.csv"
     file_path = base_dir + "/results/" + afile
     
     metrics.check_results(file_path)
